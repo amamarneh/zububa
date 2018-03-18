@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "547223957941",
+    "firebase_url": "https://zububa-322ea.firebaseio.com",
+    "project_id": "zububa-322ea",
+    "storage_bucket": "zububa-322ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547223957941:android:1a4e3159a42ebcab",
+        "android_client_info": {
+          "package_name": "com.amarnehsoft.zububa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547223957941-8k1rrga6j5so96fu8db5e1abdoeujivm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amarnehsoft.zububa",
+            "certificate_hash": "6280a7de8d8bcda8cdce7a496b30cdbbdc2ce0d2"
+          }
+        },
+        {
+          "client_id": "547223957941-cfgpmh5fdjnviadqbsgfd0k984l1ftsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgzRVzKTgR2YCOonn-eU8mpk7XhJsEkCo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547223957941-cfgpmh5fdjnviadqbsgfd0k984l1ftsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
