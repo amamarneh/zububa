@@ -3,6 +3,8 @@ package com.amarnehsoft.zububa.webapi;
 import android.content.Context;
 
 import com.amarnehsoft.zububa.ICallBack;
+import com.amarnehsoft.zububa.IRealTimeCallBack;
+import com.amarnehsoft.zububa.firebase.FBConstants;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.GalleryItem;
@@ -44,18 +46,19 @@ public class WebService implements WebApi{
     @Override
     public void getBlog(final ICallBack<List<Blog>> callBack) {
         // dummy blog
-        List<Blog> list = new ArrayList<>();
-        Blog blog = new Blog();
-        blog.setTitle("blog1");
-        blog.setContent("content");
-        blog.setImgUrl("non");
-
-        list.add(blog);
-        callBack.onResponse(list); // pass the list to callback
+//        List<Blog> list = new ArrayList<>();
+//        Blog blog = new Blog();
+//        blog.setTitle("blog1");
+//        blog.setContent("content");
+//        blog.setImgUrl("non");
+//
+//        list.add(blog);
+//        callBack.onResponse(list); // pass the list to callback
 
         // or by Firebase
-        /*
-        DatabaseReference mDataBlog = FirebaseDatabase.getInstance().getReference().child("blog");
+
+        DatabaseReference mDataBlog = FirebaseDatabase.getInstance().getReference().child(FBConstants.REF_BLOGS)
+                .child(FBConstants.VILLAGE_ZUBUBA);
         mDataBlog.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,29 +78,105 @@ public class WebService implements WebApi{
                 callBack.onError(databaseError.getMessage());
             }
         });
-
-        */
-
-
     }
 
     @Override
-    public void getTaxiList(ICallBack<List<Taxi>> callBack) {
+    public void getTaxiList(final ICallBack<List<Taxi>> callBack) {
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child(FBConstants.REF_TAXIS)
+                .child(FBConstants.VILLAGE_ZUBUBA);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> iterator =  dataSnapshot.getChildren().iterator();
+                ArrayList<Taxi> arrayList = new ArrayList<>();
+                while (iterator.hasNext()){
+                    DataSnapshot data = iterator.next();
+                    Taxi b = data.getValue(Taxi.class);
+                    arrayList.add(b);
+                }
 
+                callBack.onResponse(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callBack.onError(databaseError.getMessage());
+            }
+        });
     }
 
     @Override
-    public void getWeddings(ICallBack<List<Wedding>> callBack) {
+    public void getWeddings(final ICallBack<List<Wedding>> callBack) {
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child(FBConstants.REF_WEDDINGS)
+                .child(FBConstants.VILLAGE_ZUBUBA);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> iterator =  dataSnapshot.getChildren().iterator();
+                ArrayList<Wedding> arrayList = new ArrayList<>();
+                while (iterator.hasNext()){
+                    DataSnapshot data = iterator.next();
+                    Wedding b = data.getValue(Wedding.class);
+                    arrayList.add(b);
+                }
 
+                callBack.onResponse(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callBack.onError(databaseError.getMessage());
+            }
+        });
     }
 
     @Override
-    public void getGallery(ICallBack<List<GalleryItem>> callBack) {
+    public void getGallery(final ICallBack<List<GalleryItem>> callBack) {
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child(FBConstants.REF_GALLERIES)
+                .child(FBConstants.VILLAGE_ZUBUBA);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> iterator =  dataSnapshot.getChildren().iterator();
+                ArrayList<GalleryItem> arrayList = new ArrayList<>();
+                while (iterator.hasNext()){
+                    DataSnapshot data = iterator.next();
+                    GalleryItem b = data.getValue(GalleryItem.class);
+                    arrayList.add(b);
+                }
 
+                callBack.onResponse(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callBack.onError(databaseError.getMessage());
+            }
+        });
     }
 
     @Override
-    public void getBabies(ICallBack<List<Baby>> callBack) {
+    public void getBabies(final ICallBack<List<Baby>> callBack) {
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child(FBConstants.REF_BABIES)
+                .child(FBConstants.VILLAGE_ZUBUBA);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> iterator =  dataSnapshot.getChildren().iterator();
+                ArrayList<Baby> arrayList = new ArrayList<>();
+                while (iterator.hasNext()){
+                    DataSnapshot data = iterator.next();
+                    Baby b = data.getValue(Baby.class);
+                    arrayList.add(b);
+                }
 
+                callBack.onResponse(arrayList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callBack.onError(databaseError.getMessage());
+            }
+        });
     }
 }
