@@ -25,4 +25,8 @@ public class FBFactory {
     public static GalleryFBApi getGalleryFBApi(boolean approved){
         return new GalleryFBApi(approved);
     }
+
+    public static LikesFBApi getLikesFBApi(String ref,String childId){
+        return new LikesFBApi(ref,childId);
+    }
 }
