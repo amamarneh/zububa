@@ -31,15 +31,34 @@ public class MainActivity extends AppCompatActivity {
         blog.setCreationDate(0L);
         blog.setMacAddress("asdfggfd");
 
-        WebService.getInstance().getBlog(new ICallBack<FBBlog>() {
-            @Override
-            public void onResponse(List<FBBlog> value) {
+//        WebService.getInstance().getBlog(new ICallBack<FBBlog>() {
+//            @Override
+//            public void onResponse(List<FBBlog> value) {
+//
+//            }
+//
+//            @Override
+//            public void onError(String err) {
+//
+//            }
+//        });
 
+
+
+
+
+        //dont use webService
+        //use the factory pattern
+
+        FBFactory.getBlogApi(true).uploadItem(blog, new ISaveCallBack() {
+            @Override
+            public void success() {
+                //saved successfully
             }
 
             @Override
-            public void onError(String err) {
-
+            public void error() {
+                //error
             }
         });
     }
