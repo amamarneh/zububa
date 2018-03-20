@@ -1,9 +1,14 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
+import android.support.annotation.NonNull;
+
+import com.amarnehsoft.zububa.MainActivity;
 import com.amarnehsoft.zububa.webapi.API;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.IDeleteCallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.ISaveCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,22 +53,33 @@ public abstract class FBApi<T> implements API<T> {
     }
 
     @Override
-    public void saveItem(String childId,T item, ISaveCallBack callBack) {
+    public void saveItem(String childId,T item, ISuccessCallBack callBack) {
+        DatabaseReference ref;
         try {
-            getFBRef().child(childId).setValue(item);
-            if (callBack != null){
+            ref = getFBRef().child(childId);
+            ref.setValue(item).addOnSuccessListener(s->{
                 callBack.success();
-            }
-        }catch (Exception e){
-            if (callBack != null)
+            })
+            .addOnFailureListener(f->{
                 callBack.error();
+            });
+        }catch (Exception e){
+            callBack.error();
         }
     }
 
     @Override
-    public void delete(String childId, IDeleteCallBack callBack) {
+    public void delete(String childId, ISuccessCallBack callBack) {
+        delete(getFBRef().child(childId),callBack);
+    }
+
+    public void deleteAllInRef(ISuccessCallBack callBack){
+        delete(getFBRef(),callBack);
+    }
+
+    protected void delete(DatabaseReference ref,ISuccessCallBack callBack){
         try {
-            getFBRef().child(childId).removeValue();
+            ref.removeValue();
             if (callBack != null)
                 callBack.success();
         }catch (Exception e){

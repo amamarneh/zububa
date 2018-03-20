@@ -4,9 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.amarnehsoft.zububa.dummy.Dummy;
 import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 
@@ -49,30 +52,44 @@ public class MainActivity extends AppCompatActivity {
         //dont use webService
         //use the factory pattern
 
-        FBFactory.getBlogApi(true).getList(new ICallBack<Blog>() {
-            @Override
-            public void onResponse(List<Blog> value) {
-                for (Blog b : value){
-                    FBFactory.getLikesFBApi(FB_REF.blogs,b.getCode()).getList(new ICallBack<Like>() {
-                        @Override
-                        public void onResponse(List<Like> value) {
-                            Log.e("Amarneh","the blog:"+b.getTitle() + ", has:" + value.size() + " Likes");
-                        }
+//        BlogFBApi blogsApi = FBFactory.getBlogApi(true);
+//        blogsApi.getList(new ICallBack<Blog>() {
+//            @Override
+//            public void onResponse(List<Blog> value) {
+//                //got all approved blogs
+//                for (Blog b : value){
+//                    blogsApi.getLikes(b.getCode(), new ICallBack<Like>() {
+//                        @Override
+//                        public void onResponse(List<Like> value) {
+//                            //likes for the blog
+//                        }
+//
+//                        @Override
+//                        public void onError(String err) {
+//                            //error while getting the likes for the blog
+//                        }
+//                    });
+//
+//                    blogsApi.getComments(b.getCode(), new ICallBack<Comment>() {
+//                        @Override
+//                        public void onResponse(List<Comment> value) {
+//                            //got comments for the blog
+//                        }
+//
+//                        @Override
+//                        public void onError(String err) {
+//                            //error while getting the comments for the blog
+//                        }
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onError(String err) {
+//                //error while getting the blogs
+//            }
+//        });
 
-                        @Override
-                        public void onError(String err) {
-                            //error
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onError(String err) {
-                //error
-            }
-        });
-
-//        FBFactory.getBlogApi(false).getList(v-> {});
+        Dummy.dummyScenario();
     }
 }

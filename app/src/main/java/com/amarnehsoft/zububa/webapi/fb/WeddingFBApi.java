@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class WeddingFBApi extends FBApi<Wedding> {
+public class WeddingFBApi extends FBHasCommentsApi<Wedding> {
 
     private boolean approved = false;
 
@@ -22,12 +22,12 @@ public class WeddingFBApi extends FBApi<Wedding> {
     protected DatabaseReference getFBRef() {
         if (approved){
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.weddings.name())
+                    .child(getFB_REF().name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.APPROVED);
         }else {
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.weddings.name())
+                    .child(getFB_REF().name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.NOT_APPROVED);
         }
@@ -36,5 +36,10 @@ public class WeddingFBApi extends FBApi<Wedding> {
     @Override
     protected Class<Wedding> getEntityClass() {
         return Wedding.class;
+    }
+
+    @Override
+    protected FB_REF getFB_REF() {
+        return FB_REF.weddings;
     }
 }

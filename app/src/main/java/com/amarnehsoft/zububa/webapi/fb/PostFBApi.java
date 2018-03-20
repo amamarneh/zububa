@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class PostFBApi extends FBApi<Post> {
+public class PostFBApi extends FBHasCommentsApi<Post> {
 
     private boolean approved = false;
 
@@ -37,5 +37,10 @@ public class PostFBApi extends FBApi<Post> {
     @Override
     protected Class<Post> getEntityClass() {
         return Post.class;
+    }
+
+    @Override
+    protected FB_REF getFB_REF() {
+        return FB_REF.posts;
     }
 }

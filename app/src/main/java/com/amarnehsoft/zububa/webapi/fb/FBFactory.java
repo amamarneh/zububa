@@ -32,8 +32,8 @@ public class FBFactory {
         return new LikesFBApi(ref.name(),childId);
     }
 
-    public static CommentFBApi getCommentsFBApi(FB_REF ref,String childId){
-        return new CommentFBApi(ref.name(),childId);
+    public static CommentFBApi getCommentsFBApi(FB_REF ref,String childId,boolean approved){
+        return new CommentFBApi(ref.name(),childId,approved);
     }
 
     public static VillagesFBApi getVillagesApi(){

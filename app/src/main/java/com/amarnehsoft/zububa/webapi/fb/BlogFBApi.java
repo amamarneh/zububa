@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class BlogFBApi extends FBApi<Blog> {
+public class BlogFBApi extends FBHasCommentsApi<Blog> {
 
     private boolean approved = false;
 
@@ -36,5 +36,10 @@ public class BlogFBApi extends FBApi<Blog> {
     @Override
     protected Class<Blog> getEntityClass() {
         return Blog.class;
+    }
+
+    @Override
+    protected FB_REF getFB_REF() {
+        return FB_REF.blogs;
     }
 }

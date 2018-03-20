@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class GalleryFBApi extends FBApi<GalleryItem> {
+public class GalleryFBApi extends FBHasLikesApi<GalleryItem> {
 
     private boolean approved = false;
 
@@ -36,5 +36,10 @@ public class GalleryFBApi extends FBApi<GalleryItem> {
     @Override
     protected Class<GalleryItem> getEntityClass() {
         return GalleryItem.class;
+    }
+
+    @Override
+    protected FB_REF getFB_REF() {
+        return FB_REF.galleries;
     }
 }
