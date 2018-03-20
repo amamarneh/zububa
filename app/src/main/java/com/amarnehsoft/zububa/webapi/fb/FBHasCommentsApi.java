@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
+import com.amarnehsoft.zububa.model.BaseModel;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
@@ -9,7 +10,7 @@ import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
  * Created by user on 3/19/2018.
  */
 
-public abstract class FBHasCommentsApi<T> extends FBHasLikesApi<T> {
+public abstract class FBHasCommentsApi<T extends BaseModel> extends FBHasLikesApi<T> {
     @Override
     public void delete(String childId, ISuccessCallBack callBack) {
         super.delete(childId,callBack);

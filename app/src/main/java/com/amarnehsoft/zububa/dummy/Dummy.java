@@ -77,15 +77,15 @@ public class Dummy {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
-                    FBUtils.approve(b, new ISuccessCallBack() {
+                    FBFactory.getBlogApi(false).approve(b, new ISuccessCallBack() {
                         @Override
                         public void success() {
-                            //approved
+                            Log.e("Amarneh","approved");
                         }
 
                         @Override
                         public void error() {
-                            //faild
+
                         }
                     });
                 }

@@ -1,6 +1,7 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
 import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
 import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 import com.google.firebase.database.DatabaseReference;
@@ -10,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class BlogFBApi extends FBHasCommentsApi<Blog> {
+public class BlogFBApi extends FBHasCommentsApi<Blog> implements Uprovable<Blog>{
 
     private boolean approved = false;
 
