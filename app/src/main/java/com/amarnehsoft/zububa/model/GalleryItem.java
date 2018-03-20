@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
 public class GalleryItem extends Uploadable implements Parcelable{
@@ -13,8 +13,8 @@ public class GalleryItem extends Uploadable implements Parcelable{
     public GalleryItem() {
     }
 
-    public GalleryItem(String code, long creationDate, String macAddress, String username, String adminCode, boolean approved, long approveDate, String imgUrl, String desc) {
-        super(code, creationDate, macAddress, username, adminCode, approved, approveDate);
+    public GalleryItem(long creationDate, String macAddress, String username, String adminCode, long approveDate, String imgUrl, String desc) {
+        super(creationDate, macAddress, username, adminCode, approveDate);
         this.imgUrl = imgUrl;
         this.desc = desc;
     }

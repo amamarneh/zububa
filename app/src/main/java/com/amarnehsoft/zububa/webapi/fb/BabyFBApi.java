@@ -1,26 +1,16 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
-import com.amarnehsoft.zububa.model.FBModels.FBBaby;
-import com.amarnehsoft.zububa.model.FBModels.FBLike;
-import com.amarnehsoft.zububa.model.FBModels.FBWedding;
-import com.amarnehsoft.zububa.webapi.ICallBack;
-import com.amarnehsoft.zububa.webapi.fb.FBApi;
-import com.amarnehsoft.zububa.webapi.fb.FBConstants;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.amarnehsoft.zububa.model.Baby;
+import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
+import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by user on 3/19/2018.
  */
 
-public class BabyFBApi extends FBApi<FBBaby> {
+public class BabyFBApi extends FBApi<Baby> {
 
     private boolean approved = false;
 
@@ -28,12 +18,12 @@ public class BabyFBApi extends FBApi<FBBaby> {
     protected DatabaseReference getFBRef() {
         if (approved){
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FBConstants.REF_BABIES)
+                    .child(FB_REF.babies.name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.APPROVED);
         }else {
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FBConstants.REF_BABIES)
+                    .child(FB_REF.babies.name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.NOT_APPROVED);
         }
@@ -44,7 +34,7 @@ public class BabyFBApi extends FBApi<FBBaby> {
     }
 
     @Override
-    protected Class<FBBaby> getEntityClass() {
-        return FBBaby.class;
+    protected Class<Baby> getEntityClass() {
+        return Baby.class;
     }
 }

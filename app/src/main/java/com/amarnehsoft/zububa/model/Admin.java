@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
 public class Admin extends BaseModel implements Parcelable{
@@ -12,8 +12,8 @@ public class Admin extends BaseModel implements Parcelable{
 
     public Admin(){}
 
-    public Admin(String code, long creationDate, String username, String password, String fullName) {
-        super(code, creationDate);
+    public Admin(long creationDate, String username, String password, String fullName) {
+        super(creationDate);
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -57,4 +57,5 @@ public class Admin extends BaseModel implements Parcelable{
         parcel.writeString(password);
         parcel.writeString(fullName);
     }
+
 }

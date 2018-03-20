@@ -1,6 +1,8 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
-import com.amarnehsoft.zububa.model.FBModels.FBLike;
+import com.amarnehsoft.zububa.model.Like;
+import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
+import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -8,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class CommentFBApi extends FBApi<FBLike> {
+public class CommentFBApi extends FBApi<Like> {
 
     private String ref;
     private String childId;
@@ -21,14 +23,14 @@ public class CommentFBApi extends FBApi<FBLike> {
     @Override
     protected DatabaseReference getFBRef() {
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FBConstants.REF_COMMENTS)
+                    .child(FB_REF.comments.name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(ref)
                     .child(childId);
     }
 
     @Override
-    protected Class<FBLike> getEntityClass() {
-        return FBLike.class;
+    protected Class<Like> getEntityClass() {
+        return Like.class;
     }
 }

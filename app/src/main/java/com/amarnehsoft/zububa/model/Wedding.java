@@ -1,21 +1,20 @@
 package com.amarnehsoft.zububa.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
-public class Wedding extends Uploadable implements Parcelable{
+public class Wedding extends Uploadable {
     private String personName,title,content,imgUrl;
     private long weddingDate;
 
     public Wedding() {
     }
 
-    public Wedding(String code, long creationDate, String macAddress, String username, String adminCode, boolean approved, long approveDate, String personName, String title, String content, String imgUrl, long weddingDate) {
-        super(code, creationDate, macAddress, username, adminCode, approved, approveDate);
+    public Wedding(long creationDate, String macAddress, String username, String adminCode, long approveDate, String personName, String title, String content, String imgUrl, long weddingDate) {
+        super(creationDate, macAddress, username, adminCode, approveDate);
         this.personName = personName;
         this.title = title;
         this.content = content;

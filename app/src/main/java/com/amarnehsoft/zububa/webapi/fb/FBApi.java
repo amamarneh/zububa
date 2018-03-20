@@ -1,8 +1,9 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
 import com.amarnehsoft.zububa.webapi.API;
-import com.amarnehsoft.zububa.webapi.ICallBack;
-import com.amarnehsoft.zububa.webapi.ISaveCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IDeleteCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ISaveCallBack;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,9 +48,9 @@ public abstract class FBApi<T> implements API<T> {
     }
 
     @Override
-    public void uploadItem(T item, ISaveCallBack callBack) {
+    public void saveItem(String childId,T item, ISaveCallBack callBack) {
         try {
-            getFBRef().push().setValue(item);
+            getFBRef().child(childId).setValue(item);
             if (callBack != null){
                 callBack.success();
             }
@@ -60,12 +61,11 @@ public abstract class FBApi<T> implements API<T> {
     }
 
     @Override
-    public void updateItem(String childId, T item, ISaveCallBack callBack) {
+    public void delete(String childId, IDeleteCallBack callBack) {
         try {
-            getFBRef().child(childId).setValue(item);
-            if (callBack != null){
+            getFBRef().child(childId).removeValue();
+            if (callBack != null)
                 callBack.success();
-            }
         }catch (Exception e){
             if (callBack != null)
                 callBack.error();

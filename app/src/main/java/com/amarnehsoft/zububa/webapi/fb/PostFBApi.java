@@ -1,6 +1,7 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
-import com.amarnehsoft.zububa.model.Taxi;
+import com.amarnehsoft.zububa.model.Post;
+import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 import com.google.firebase.database.DatabaseReference;
@@ -10,11 +11,11 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class TaxiFBApi extends FBApi<Taxi> {
+public class PostFBApi extends FBApi<Post> {
 
     private boolean approved = false;
 
-    public TaxiFBApi(boolean approved){
+    public PostFBApi(boolean approved){
         this.approved = approved;
     }
 
@@ -22,19 +23,19 @@ public class TaxiFBApi extends FBApi<Taxi> {
     protected DatabaseReference getFBRef() {
         if (approved){
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.taxies.name())
+                    .child(FB_REF.posts.name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.APPROVED);
         }else {
             return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.taxies.name())
+                    .child(FB_REF.posts.name())
                     .child(FBConstants.VILLAGE_ZUBUBA)
                     .child(FBConstants.NOT_APPROVED);
         }
     }
 
     @Override
-    protected Class<Taxi> getEntityClass() {
-        return Taxi.class;
+    protected Class<Post> getEntityClass() {
+        return Post.class;
     }
 }

@@ -3,25 +3,32 @@ package com.amarnehsoft.zububa.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.amarnehsoft.zububa.model.FBModels.FBBaseModel;
+import java.util.UUID;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
-public class BaseModel extends FBBaseModel implements Parcelable{
+public class BaseModel implements Parcelable{
+    private long creationDate;
     private String code;
 
-    public BaseModel(){}
+    protected String generateCode(){
+        return UUID.randomUUID().toString();
+    }
 
-    public BaseModel(String code, long creationDate) {
-        super(creationDate);
-        this.code = code;
+    public BaseModel(long creationDate) {
+        this.creationDate = creationDate;
+        this.code = generateCode();
     }
 
     protected BaseModel(Parcel in) {
-        super(in);
+        creationDate = in.readLong();
         code = in.readString();
+    }
+
+    public BaseModel() {
+        code = generateCode();
     }
 
     public static final Creator<BaseModel> CREATOR = new Creator<BaseModel>() {
@@ -35,6 +42,14 @@ public class BaseModel extends FBBaseModel implements Parcelable{
             return new BaseModel[size];
         }
     };
+
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(long creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public String getCode() {
         return code;
@@ -51,7 +66,7 @@ public class BaseModel extends FBBaseModel implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        super.writeToParcel(parcel,i);
+        parcel.writeLong(creationDate);
         parcel.writeString(code);
     }
 }

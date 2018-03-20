@@ -1,5 +1,7 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
+import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
+
 /**
  * Created by user on 3/19/2018.
  */
@@ -26,7 +28,19 @@ public class FBFactory {
         return new GalleryFBApi(approved);
     }
 
-    public static LikesFBApi getLikesFBApi(String ref,String childId){
-        return new LikesFBApi(ref,childId);
+    public static LikesFBApi getLikesFBApi(FB_REF ref, String childId){
+        return new LikesFBApi(ref.name(),childId);
+    }
+
+    public static CommentFBApi getCommentsFBApi(FB_REF ref,String childId){
+        return new CommentFBApi(ref.name(),childId);
+    }
+
+    public static VillagesFBApi getVillagesApi(){
+        return new VillagesFBApi();
+    }
+
+    public static PostFBApi getPostFBApi(boolean approved){
+        return new PostFBApi(approved);
     }
 }

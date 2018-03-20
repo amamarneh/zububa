@@ -2,22 +2,13 @@ package com.amarnehsoft.zububa.webapi;
 
 import android.content.Context;
 
-import com.amarnehsoft.zububa.webapi.fb.FBConstants;
-import com.amarnehsoft.zububa.model.FBModels.FBBaby;
-import com.amarnehsoft.zububa.model.FBModels.FBBlog;
-import com.amarnehsoft.zububa.model.FBModels.FBGalleryItem;
-import com.amarnehsoft.zububa.model.FBModels.FBTaxi;
-import com.amarnehsoft.zububa.model.FBModels.FBWedding;
+import com.amarnehsoft.zububa.model.Baby;
+import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.model.GalleryItem;
+import com.amarnehsoft.zububa.model.Taxi;
+import com.amarnehsoft.zububa.model.Wedding;
+import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by ALa on 3/17/2018.
@@ -43,27 +34,27 @@ public class WebService implements WebApi{
 
 
     @Override
-    public void getBlog(final ICallBack<FBBlog> callBack) {
+    public void getBlog(final ICallBack<Blog> callBack) {
         FBFactory.getBlogApi(true).getList(callBack);
     }
 
     @Override
-    public void getTaxiList(final ICallBack<FBTaxi> callBack) {
+    public void getTaxiList(final ICallBack<Taxi> callBack) {
         FBFactory.getTaxiApi(true).getList(callBack);
     }
 
     @Override
-    public void getWeddings(final ICallBack<FBWedding> callBack) {
+    public void getWeddings(final ICallBack<Wedding> callBack) {
         FBFactory.getWeddingFBApi(true).getList(callBack);
     }
 
     @Override
-    public void getGallery(final ICallBack<FBGalleryItem> callBack) {
+    public void getGallery(final ICallBack<GalleryItem> callBack) {
         FBFactory.getGalleryFBApi(true).getList(callBack);
     }
 
     @Override
-    public void getBabies(final ICallBack<FBBaby> callBack) {
+    public void getBabies(final ICallBack<Baby> callBack) {
         FBFactory.getBabyFBApi(true).getList(callBack);
     }
 }

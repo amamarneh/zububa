@@ -1,7 +1,8 @@
 package com.amarnehsoft.zububa.webapi;
 
-import com.amarnehsoft.zububa.webapi.ICallBack;
-import com.amarnehsoft.zububa.webapi.ISaveCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IDeleteCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ISaveCallBack;
 
 /**
  * Created by user on 3/19/2018.
@@ -9,6 +10,6 @@ import com.amarnehsoft.zububa.webapi.ISaveCallBack;
 
 public interface API<T> {
     void getList(ICallBack<T> callBack);
-    void uploadItem(T item,ISaveCallBack callBack);
-    void updateItem(String childId,T item,ISaveCallBack callBack);
+    void saveItem(String childId,T item,ISaveCallBack callBack);
+    void delete(String childId, IDeleteCallBack callBack);
 }

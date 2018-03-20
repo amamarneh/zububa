@@ -4,17 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
-public class Blog extends Uploadable implements Parcelable{
+public class Blog extends Uploadable implements Parcelable {
     private String title,content,imgUrl;
 
     public Blog() {
     }
 
-    public Blog(String code, long creationDate, String macAddress, String username, String adminCode, boolean approved, long approveDate, String title, String content, String imgUrl) {
-        super(code, creationDate, macAddress, username, adminCode, approved, approveDate);
+    public Blog(long creationDate, String macAddress, String username, String adminCode, long approveDate, String title, String content, String imgUrl) {
+        super(creationDate, macAddress, username, adminCode, approveDate);
         this.title = title;
         this.content = content;
         this.imgUrl = imgUrl;

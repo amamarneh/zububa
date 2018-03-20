@@ -3,13 +3,12 @@ package com.amarnehsoft.zububa;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 
-import com.amarnehsoft.zububa.model.FBModels.FBBlog;
-import com.amarnehsoft.zububa.webapi.ICallBack;
-import com.amarnehsoft.zububa.webapi.ISaveCallBack;
-import com.amarnehsoft.zububa.webapi.WebService;
+import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.model.Like;
+import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
+import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //test
-        FBBlog blog = new FBBlog();
+        Blog blog = new Blog();
         blog.setTitle("test title");
         blog.setContent("test content");
         blog.setImgUrl("image url");
@@ -31,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         blog.setCreationDate(0L);
         blog.setMacAddress("asdfggfd");
 
-//        WebService.getInstance().getBlog(new ICallBack<FBBlog>() {
+//        WebService.getInstance().getBlog(new ICallBack<Blog>() {
 //            @Override
-//            public void onResponse(List<FBBlog> value) {
+//            public void onResponse(List<Blog> value) {
 //
 //            }
 //
@@ -50,16 +49,30 @@ public class MainActivity extends AppCompatActivity {
         //dont use webService
         //use the factory pattern
 
-        FBFactory.getBlogApi(true).uploadItem(blog, new ISaveCallBack() {
+        FBFactory.getBlogApi(true).getList(new ICallBack<Blog>() {
             @Override
-            public void success() {
-                //saved successfully
+            public void onResponse(List<Blog> value) {
+                for (Blog b : value){
+                    FBFactory.getLikesFBApi(FB_REF.blogs,b.getCode()).getList(new ICallBack<Like>() {
+                        @Override
+                        public void onResponse(List<Like> value) {
+                            Log.e("Amarneh","the blog:"+b.getTitle() + ", has:" + value.size() + " Likes");
+                        }
+
+                        @Override
+                        public void onError(String err) {
+                            //error
+                        }
+                    });
+                }
             }
 
             @Override
-            public void error() {
+            public void onError(String err) {
                 //error
             }
         });
+
+//        FBFactory.getBlogApi(false).getList(v-> {});
     }
 }

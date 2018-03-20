@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by user on 3/17/2018.
+ * Created by user on 3/19/2018.
  */
 
 public class Taxi extends Uploadable implements Parcelable{
@@ -13,8 +13,8 @@ public class Taxi extends Uploadable implements Parcelable{
     public Taxi() {
     }
 
-    public Taxi(String code, long creationDate, String macAddress, String username, String adminCode, boolean approved, long approveDate, String name, String desc, String phone) {
-        super(code, creationDate, macAddress, username, adminCode, approved, approveDate);
+    public Taxi(long creationDate, String macAddress, String username, String adminCode, long approveDate, String name, String desc, String phone) {
+        super(creationDate, macAddress, username, adminCode, approveDate);
         this.name = name;
         this.desc = desc;
         this.phone = phone;
