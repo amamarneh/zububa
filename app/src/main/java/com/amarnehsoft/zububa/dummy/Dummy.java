@@ -6,6 +6,7 @@ import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
 
@@ -38,12 +39,12 @@ public class Dummy {
         //create a blog and push it to not approved blogs
 
         Blog b = new Blog(new Date().getTime(), "asd", "ahmad", "",0,"test title" , "test content", "");
-        FBFactory.getBlogApi(false).saveItem(b.getCode(), b, (success)-> {if (success) Log.e("Amarneh","saved successfully");} );
+        FBFactory.getBlogApi(false).saveItem(b, (success)-> {if (success) Log.e("Amarneh","saved successfully");} );
     }
 
     private static void case2(){
         //show not approved blogs
-        FBFactory.getBlogApi(false).getList(new ICallBack<Blog>() {
+        FBFactory.getBlogApi(false).getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
@@ -60,7 +61,7 @@ public class Dummy {
 
     private static void case3(){
         //approve all not approved blogs
-        FBFactory.getBlogApi(false).getList(new ICallBack<Blog>() {
+        FBFactory.getBlogApi(false).getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
@@ -78,7 +79,7 @@ public class Dummy {
     private static void case4(){
         //show approved and like it and add a comment
         BlogFBApi blogsApi = FBFactory.getBlogApi(true);
-        blogsApi.getList(new ICallBack<Blog>() {
+        blogsApi.getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
@@ -97,12 +98,12 @@ public class Dummy {
     public static void case5(){
         //show not approved comments for the approved blogs and approve it
         Log.e("Amarneh","hi");
-        FBFactory.getBlogApi(true).getList(new ICallBack<Blog>() {
+        FBFactory.getBlogApi(true).getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog blog : value){
                     Log.e("Amarneh","blog:"+blog.getTitle());
-                    FBFactory.getBlogApi(true).getComments(blog.getCode(), false, new ICallBack<Comment>() {
+                    FBFactory.getBlogApi(true).getComments(blog.getCode(), false, new IListCallBack<Comment>() {
                         @Override
                         public void onResponse(List<Comment> value) {
                             for (Comment comment : value){
@@ -129,7 +130,7 @@ public class Dummy {
 
     private static void case6(){
         //delete the blogs and ites likes and comments
-        FBFactory.getBlogApi(true).getList(new ICallBack<Blog>() {
+        FBFactory.getBlogApi(true).getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog blog : value){

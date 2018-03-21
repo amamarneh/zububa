@@ -13,6 +13,8 @@ public class Post extends Uploadable implements Parcelable{
     public static final int TYPE_AD =1;
     //etc
 
+    private String title,content,imgUrl;
+    private int type;
 
     public Post() {
     }
@@ -33,8 +35,7 @@ public class Post extends Uploadable implements Parcelable{
         type = in.readInt();
     }
 
-    private String title,content,imgUrl;
-    private int type;
+
 
     public String getTitle() {
         return title;

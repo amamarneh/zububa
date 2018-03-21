@@ -12,25 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class WeddingFBApi extends FBHasCommentsApi<Wedding> {
 
-    private boolean approved = false;
-
     public WeddingFBApi(boolean approved){
-        this.approved = approved;
-    }
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(getFB_REF().name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(getFB_REF().name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
+        super(approved);
     }
 
     @Override

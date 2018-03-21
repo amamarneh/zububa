@@ -12,25 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class GalleryFBApi extends FBHasLikesApi<GalleryItem> {
 
-    private boolean approved = false;
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.galleries.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.galleries.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
-    }
-
-    public GalleryFBApi(boolean approved){
-            this.approved = approved;
+    public GalleryFBApi(boolean approved) {
+        super(approved);
     }
 
     @Override

@@ -12,25 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BabyFBApi extends FBHasCommentsApi<Baby> {
 
-    private boolean approved = false;
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.babies.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.babies.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
-    }
-
-    public BabyFBApi(boolean approved){
-            this.approved = approved;
+    public BabyFBApi(boolean approved) {
+        super(approved);
     }
 
     @Override

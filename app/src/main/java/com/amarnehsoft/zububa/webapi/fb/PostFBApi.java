@@ -13,25 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class PostFBApi extends FBHasCommentsApi<Post> {
 
-    private boolean approved = false;
-
     public PostFBApi(boolean approved){
-        this.approved = approved;
-    }
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.posts.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.posts.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
+       super(approved);
     }
 
     @Override

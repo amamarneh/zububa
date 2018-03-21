@@ -18,9 +18,9 @@ public class CommentFBApi extends FBHasLikesApi<Comment> {
     private boolean approved = false;
 
     public CommentFBApi(String ref, String childId,boolean approved){
+        super(approved);
         this.ref = ref;
         this.childId = childId;
-        this.approved = approved;
     }
 
     @Override
