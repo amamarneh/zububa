@@ -1,10 +1,13 @@
 package com.amarnehsoft.zububa.webapi;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.GalleryItem;
+import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
@@ -34,7 +37,7 @@ public class WebService implements WebApi{
 
 
     @Override
-    public void getBlog(final ICallBack<Blog> callBack) {
+    public void getBlog(ICallBack<Blog> callBack) {
         FBFactory.getBlogApi(true).getList(callBack);
     }
 
@@ -57,4 +60,86 @@ public class WebService implements WebApi{
     public void getBabies(final ICallBack<Baby> callBack) {
         FBFactory.getBabyFBApi(true).getList(callBack);
     }
+
+    @Override
+    public void getPosts(ICallBack<Post> callBack) {
+
+    }
+
+    @Override
+    public void writeTaxiItem(Taxi taxi, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void writeBabyItem(Baby baby, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void writeWeddingItem(Wedding wedding, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void writeGalleryItem(GalleryItem galleryItem, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void writePost(Post post, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendLikeForPost(Post post, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendLikeForBaby(Baby baby, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendLikeForBlog(Blog blog, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendLikeForGallery(GalleryItem galleryItem, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendLikeForWedding(Wedding wedding, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendCommentForPost(Post post, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendCommentForBaby(Baby baby, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendCommentForBlog(Blog blog, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendCommentForGalley(GalleryItem galleryItem, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void sendCommentForWedding(Wedding wedding, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+
 }
