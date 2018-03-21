@@ -6,14 +6,11 @@ import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
 import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
-import com.amarnehsoft.zububa.webapi.fb.FBUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.LongFunction;
 
 /**
  * Created by user on 3/19/2018.
@@ -41,17 +38,7 @@ public class Dummy {
         //create a blog and push it to not approved blogs
 
         Blog b = new Blog(new Date().getTime(), "asd", "ahmad", "",0,"test title" , "test content", "");
-        FBFactory.getBlogApi(false).saveItem(b.getCode(), b, new ISuccessCallBack() {
-            @Override
-            public void success() {
-                Log.e("Amarneh","saved successfully");
-            }
-
-            @Override
-            public void error() {
-                Log.e("Amarneh","error while saving the blog!");
-            }
-        });
+        FBFactory.getBlogApi(false).saveItem(b.getCode(), b, (success)-> {if (success) Log.e("Amarneh","saved successfully");} );
     }
 
     private static void case2(){
@@ -77,17 +64,7 @@ public class Dummy {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
-                    FBFactory.getBlogApi(false).approve(b, new ISuccessCallBack() {
-                        @Override
-                        public void success() {
-                            Log.e("Amarneh","approved");
-                        }
-
-                        @Override
-                        public void error() {
-
-                        }
-                    });
+                    FBFactory.getBlogApi(false).approve(b,(success)->{if (success) Log.e("Amarneh","approved");});
                 }
             }
 
@@ -105,29 +82,8 @@ public class Dummy {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
-                    blogsApi.putLike(b.getCode(), new Like(new Date().getTime(), "assssddd"), new ISuccessCallBack() {
-                        @Override
-                        public void success() {
-                            Log.e("Amarneh","liked");
-                        }
-
-                        @Override
-                        public void error() {
-                            //error
-                        }
-                    });
-
-                    blogsApi.putComment(b.getCode(), new Comment(new Date().getTime(), "sdsd", "ahmad", "", new Date().getTime(), "test comment"), new ISuccessCallBack() {
-                        @Override
-                        public void success() {
-                            Log.e("Amarneh","comment saved successfully");
-                        }
-
-                        @Override
-                        public void error() {
-                            //error
-                        }
-                    });
+                    blogsApi.putLike(b.getCode(), new Like(new Date().getTime(), "assssddd"), (success)->{ if (success) Log.e("Amarneh","liked");});
+                    blogsApi.putComment(b.getCode(), new Comment(new Date().getTime(), "sdsd", "ahmad", "", new Date().getTime(), "test comment"),(success)->{});
                 }
             }
 
@@ -151,18 +107,7 @@ public class Dummy {
                         public void onResponse(List<Comment> value) {
                             for (Comment comment : value){
                                 Log.e("Amarneh","not approved comment:"+comment.getComment());
-                                FBFactory.getBlogApi(true).approveComment(blog.getCode(), comment, new ISuccessCallBack() {
-                                    @Override
-                                    public void success() {
-                                        //approved
-                                        Log.e("Amarneh","comment approved");
-                                    }
-
-                                    @Override
-                                    public void error() {
-                                        //error
-                                    }
-                                });
+                                FBFactory.getBlogApi(true).approveComment(blog.getCode(), comment, success -> {});
                             }
                         }
 
@@ -188,17 +133,7 @@ public class Dummy {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog blog : value){
-                    FBFactory.getBlogApi(true).delete(blog.getCode(), new ISuccessCallBack() {
-                        @Override
-                        public void success() {
-                            Log.e("Amarneh","deleted");
-                        }
-
-                        @Override
-                        public void error() {
-                            //error
-                        }
-                    });
+                    FBFactory.getBlogApi(true).delete(blog.getCode(), success -> {});
                 }
             }
 

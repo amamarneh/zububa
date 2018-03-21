@@ -1,14 +1,8 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
-import android.support.annotation.NonNull;
-
-import com.amarnehsoft.zububa.MainActivity;
 import com.amarnehsoft.zububa.webapi.API;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.amarnehsoft.zububa.webapi.callBacks.ICompleteCallBack;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,38 +47,40 @@ public abstract class FBApi<T> implements API<T> {
     }
 
     @Override
-    public void saveItem(String childId,T item, ISuccessCallBack callBack) {
+    public void saveItem(String childId,T item, ICompleteCallBack callBack) {
         DatabaseReference ref;
         try {
             ref = getFBRef().child(childId);
             ref.setValue(item).addOnSuccessListener(s->{
-                callBack.success();
+                callBack.completed(true);
             })
             .addOnFailureListener(f->{
-                callBack.error();
+                callBack.completed(false);
             });
         }catch (Exception e){
-            callBack.error();
+            callBack.completed(false);
         }
     }
 
     @Override
-    public void delete(String childId, ISuccessCallBack callBack) {
+    public void delete(String childId, ICompleteCallBack callBack) {
         delete(getFBRef().child(childId),callBack);
     }
 
-    public void deleteAllInRef(ISuccessCallBack callBack){
+    public void deleteAllInRef(ICompleteCallBack callBack){
         delete(getFBRef(),callBack);
     }
 
-    protected void delete(DatabaseReference ref,ISuccessCallBack callBack){
+    protected void delete(DatabaseReference ref,ICompleteCallBack callBack){
         try {
-            ref.removeValue();
-            if (callBack != null)
-                callBack.success();
+            ref.removeValue().addOnSuccessListener(s->{
+                callBack.completed(true);
+            })
+             .addOnFailureListener(f->{
+                 callBack.completed(false);
+             });
         }catch (Exception e){
-            if (callBack != null)
-                callBack.error();
+                callBack.completed(false);
         }
     }
 }

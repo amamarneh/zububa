@@ -3,7 +3,7 @@ package com.amarnehsoft.zububa.webapi.fb;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.model.Uprovable;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.ISuccessCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.ICompleteCallBack;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public abstract class FBHasLikesApi<T extends Uprovable> extends FBApi<T> implem
     protected abstract FB_REF getFB_REF();
 
     @Override
-    public void delete(String childId, ISuccessCallBack callBack) {
+    public void delete(String childId, ICompleteCallBack callBack) {
         super.delete(childId,callBack);
         FBFactory.getLikesFBApi(getFB_REF(),childId).deleteAllInRef(callBack);
     }
@@ -26,24 +26,20 @@ public abstract class FBHasLikesApi<T extends Uprovable> extends FBApi<T> implem
         FBFactory.getLikesFBApi(getFB_REF(),childId).getList(callBack);
     }
 
-    public void putLike(String childId,Like like,ISuccessCallBack callBack){
+    public void putLike(String childId,Like like,ICompleteCallBack callBack){
         FBFactory.getLikesFBApi(getFB_REF(),childId).saveItem(like.getCode(),like,callBack);
     }
 
     @Override
-    public void approve(T bean, ISuccessCallBack callBack) {
+    public void approve(T bean, ICompleteCallBack callBack) {
         //delete and then push to approved
-        delete(bean.getCode(), new ISuccessCallBack() {
-            @Override
-            public void success() {
+        delete(bean.getCode(), (success)->{
+            if (success){
                 bean.setAdminCode("admin");
                 bean.setApproveDate(new Date().getTime());
                 saveItem(bean.getCode(),bean,callBack);
-            }
-
-            @Override
-            public void error() {
-                callBack.error();
+            }else {
+                callBack.completed(false);
             }
         });
     }
