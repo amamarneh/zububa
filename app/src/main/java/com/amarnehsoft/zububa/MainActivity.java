@@ -49,27 +49,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //dont use webService
-        //use the factory pattern
+//        dont use webService
+//        use the factory pattern
 
-//        BlogFBApi blogsApi = FBFactory.getBlogApi(true);
-//        blogsApi.getList(new ICallBack<Blog>() {
-//            @Override
-//            public void onResponse(List<Blog> value) {
-//                //got all approved blogs
-//                for (Blog b : value){
-//                    blogsApi.getLikes(b.getCode(), new ICallBack<Like>() {
-//                        @Override
-//                        public void onResponse(List<Like> value) {
-//                            //likes for the blog
-//                        }
-//
-//                        @Override
-//                        public void onError(String err) {
-//                            //error while getting the likes for the blog
-//                        }
-//                    });
-//
+        BlogFBApi blogsApi = FBFactory.getBlogApi(true);
+        blogsApi.getList(new ICallBack<Blog>() {
+            @Override
+            public void onResponse(List<Blog> value) {
+                //got all approved blogs
+                for (Blog b : value){
+                    blogsApi.getLikes(b.getCode(), new ICallBack<Like>() {
+                        @Override
+                        public void onResponse(List<Like> value) {
+                            //likes for the blog
+                        }
+
+                        @Override
+                        public void onError(String err) {
+                            //error while getting the likes for the blog
+                        }
+                    });
+
 //                    blogsApi.getComments(b.getCode(), new ICallBack<Comment>() {
 //                        @Override
 //                        public void onResponse(List<Comment> value) {
@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
 //                            //error while getting the comments for the blog
 //                        }
 //                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String err) {
-//                //error while getting the blogs
-//            }
-//        });
+                }
+            }
+
+            @Override
+            public void onError(String err) {
+                //error while getting the blogs
+            }
+        });
 
         Dummy.dummyScenario();
     }

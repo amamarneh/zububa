@@ -3,12 +3,32 @@ package com.amarnehsoft.zububa.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by user on 3/19/2018.
  */
 
 public class Blog extends Uploadable implements Parcelable {
     private String title,content,imgUrl;
+    private List<Like> likes;
+    private List<Comment> comments;
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Blog() {
     }

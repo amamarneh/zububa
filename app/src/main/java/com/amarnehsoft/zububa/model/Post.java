@@ -3,6 +3,8 @@ package com.amarnehsoft.zububa.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by user on 3/19/2018.
  */
@@ -11,6 +13,24 @@ public class Post extends Uploadable implements Parcelable{
 
     public static final int TYPE_POST= 0;
     public static final int TYPE_AD =1;
+    private List<Like> likes;
+    private List<Comment> comments;
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
     //etc
 
     private String title,content,imgUrl;

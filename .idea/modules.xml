@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\MEGA\WorkArea\Android\AM\zububa2\app\app.iml" filepath="D:\MEGA\WorkArea\Android\AM\zububa2\app\app.iml" />
       <module fileurl="file://E:\android\me\zububa\me.iml" filepath="E:\android\me\zububa\me.iml" />
       <module fileurl="file://D:\MEGA\WorkArea\Android\AM\zububa2\zububa.iml" filepath="D:\MEGA\WorkArea\Android\AM\zububa2\zububa.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/zububa2.iml" filepath="$PROJECT_DIR$/.idea/zububa2.iml" />
