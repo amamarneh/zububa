@@ -1,8 +1,10 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
+import com.amarnehsoft.zububa.model.BaseModel;
 import com.amarnehsoft.zububa.webapi.API;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.ICompleteCallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,7 +17,7 @@ import java.util.Iterator;
  * Created by user on 3/19/2018.
  */
 
-public abstract class FBApi<T> implements API<T> {
+public abstract class FBApi<T extends BaseModel> implements API<T> {
 
     protected abstract DatabaseReference getFBRef();
 
@@ -23,9 +25,8 @@ public abstract class FBApi<T> implements API<T> {
 
 
     @Override
-    public void getList(final ICallBack<T> callBack) {
-            DatabaseReference mDataBlog = getFBRef();
-            mDataBlog.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getList(final IListCallBack<T> callBack) {
+            getFBRef().addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Iterator<DataSnapshot> iterator =  dataSnapshot.getChildren().iterator();
@@ -35,7 +36,6 @@ public abstract class FBApi<T> implements API<T> {
                         T b = data.getValue(getEntityClass());
                         arrayList.add(b);
                     }
-
                     callBack.onResponse(arrayList);
                 }
 
@@ -47,16 +47,13 @@ public abstract class FBApi<T> implements API<T> {
     }
 
     @Override
-    public void saveItem(String childId,T item, ICompleteCallBack callBack) {
+    public void saveItem(T item, ICompleteCallBack callBack) {
         DatabaseReference ref;
         try {
-            ref = getFBRef().child(childId);
-            ref.setValue(item).addOnSuccessListener(s->{
-                callBack.completed(true);
-            })
-            .addOnFailureListener(f->{
-                callBack.completed(false);
-            });
+            ref = getFBRef().child(item.getCode());
+            ref.setValue(item)
+                    .addOnSuccessListener(s->{callBack.completed(true);})
+                    .addOnFailureListener(f->{callBack.completed(false);});
         }catch (Exception e){
             callBack.completed(false);
         }
@@ -73,12 +70,9 @@ public abstract class FBApi<T> implements API<T> {
 
     protected void delete(DatabaseReference ref,ICompleteCallBack callBack){
         try {
-            ref.removeValue().addOnSuccessListener(s->{
-                callBack.completed(true);
-            })
-             .addOnFailureListener(f->{
-                 callBack.completed(false);
-             });
+            ref.removeValue()
+                    .addOnSuccessListener(s->{callBack.completed(true);})
+                    .addOnFailureListener(f->{callBack.completed(false);});
         }catch (Exception e){
                 callBack.completed(false);
         }

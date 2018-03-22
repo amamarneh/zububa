@@ -7,6 +7,6 @@ import java.util.List;
  */
 
 public interface ICallBack<T> {
-    void onResponse(List<T> value);
+    void onResponse(T value);
     void onError(String err);
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amarnehsoft.zububa">
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".core.FireApp"
         android:allowBackup="true"

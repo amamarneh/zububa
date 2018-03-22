@@ -12,25 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TaxiFBApi extends FBHasCommentsApi<Taxi> {
 
-    private boolean approved = false;
-
     public TaxiFBApi(boolean approved){
-        this.approved = approved;
-    }
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.taxies.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.taxies.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
+        super(approved);
     }
 
     @Override

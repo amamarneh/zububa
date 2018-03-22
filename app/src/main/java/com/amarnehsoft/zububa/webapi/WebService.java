@@ -1,13 +1,10 @@
 package com.amarnehsoft.zububa.webapi;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
-import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.GalleryItem;
-import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
@@ -37,27 +34,27 @@ public class WebService implements WebApi{
 
 
     @Override
-    public void getBlog(ICallBack<Blog> callBack) {
+    public void getBlog(final IListCallBack<Blog> callBack) {
         FBFactory.getBlogApi(true).getList(callBack);
     }
 
     @Override
-    public void getTaxiList(final ICallBack<Taxi> callBack) {
+    public void getTaxiList(final IListCallBack<Taxi> callBack) {
         FBFactory.getTaxiApi(true).getList(callBack);
     }
 
     @Override
-    public void getWeddings(final ICallBack<Wedding> callBack) {
+    public void getWeddings(final IListCallBack<Wedding> callBack) {
         FBFactory.getWeddingFBApi(true).getList(callBack);
     }
 
     @Override
-    public void getGallery(final ICallBack<GalleryItem> callBack) {
+    public void getGallery(final IListCallBack<GalleryItem> callBack) {
         FBFactory.getGalleryFBApi(true).getList(callBack);
     }
 
     @Override
-    public void getBabies(final ICallBack<Baby> callBack) {
+    public void getBabies(final IListCallBack<Baby> callBack) {
         FBFactory.getBabyFBApi(true).getList(callBack);
     }
 

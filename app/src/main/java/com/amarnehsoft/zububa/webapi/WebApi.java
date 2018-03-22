@@ -17,12 +17,13 @@ import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
  */
 
 public interface WebApi {
-    void getBlog(ICallBack<Blog> callBack); // get list of blog from web server
-    void getTaxiList(ICallBack<Taxi> callBack); // get list of taxi contacts
-    void getWeddings(ICallBack<Wedding> callBack); // get list of weddings
-    void getGallery(ICallBack<GalleryItem> callBack); // get list of gallery items
-    void getBabies(ICallBack<Baby> callBack); // get list of babies
-    void getPosts(ICallBack<Post> callBack); // get list of posts
+    void getBlog(IListCallBack<Blog> callBack); // get list of blog from web server
+    void getTaxiList(IListCallBack<Taxi> callBack); // get list of taxi contacts
+    void getWeddings(IListCallBack<Wedding> callBack); // get list of weddings
+    void getGallery(IListCallBack<GalleryItem> callBack); // get list of gallery items
+    void getBabies(IListCallBack<Baby> callBack); // get list of babies
+    void getPosts(IListCallBack<Post> callBack); // get list of posts
+
 
     /**
      * this method used to write a new taxi member from user

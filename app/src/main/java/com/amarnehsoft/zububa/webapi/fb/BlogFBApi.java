@@ -12,25 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BlogFBApi extends FBHasCommentsApi<Blog> implements IUprovable<Blog> {
 
-    private boolean approved = false;
-
-    public BlogFBApi(boolean approved){
-        this.approved = approved;
-    }
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        if (approved){
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.blogs.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.APPROVED);
-        }else {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.blogs.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(FBConstants.NOT_APPROVED);
-        }
+    public BlogFBApi(boolean approved) {
+        super(approved);
     }
 
     @Override
