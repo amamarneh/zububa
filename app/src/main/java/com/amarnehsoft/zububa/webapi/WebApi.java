@@ -11,6 +11,7 @@ import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 
 /**
  * Created by ALa on 3/17/2018.
