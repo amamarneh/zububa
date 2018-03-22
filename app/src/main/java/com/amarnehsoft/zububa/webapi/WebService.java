@@ -1,13 +1,17 @@
 package com.amarnehsoft.zububa.webapi;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
+import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.GalleryItem;
+import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
 
 /**
@@ -59,7 +63,7 @@ public class WebService implements WebApi{
     }
 
     @Override
-    public void getPosts(ICallBack<Post> callBack) {
+    public void getPosts(IListCallBack<Post> callBack) {
 
     }
 
