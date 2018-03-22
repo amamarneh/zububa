@@ -1,39 +1,43 @@
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swiperefresh"
+<android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.design.widget.CoordinatorLayout
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/layoutMessage"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:tint="@color/colorPrimary"
+            android:id="@+id/imgMessage"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+        <TextView
+            android:id="@+id/tvMessage"
+            android:textColor="@color/colorPrimary"
+            android:text="No internet connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout> <!-- Layout Message -->
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/layoutMessage"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:tint="@color/colorPrimary"
-                android:id="@+id/imgMessage"
-                android:layout_width="48dp"
-                android:layout_height="48dp" />
-            <TextView
-                android:id="@+id/tvMessage"
-                android:textColor="@color/colorPrimary"
-                android:text="No internet connection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
+        <ProgressBar
+            android:minHeight="0dp"
+            android:indeterminate="true"
+            android:id="@+id/progressBarLoading"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
+    </LinearLayout> <!-- List and loading layout -->
 
-        </android.support.v7.widget.RecyclerView>
-    </android.support.design.widget.CoordinatorLayout>
-
-</android.support.v4.widget.SwipeRefreshLayout>
-
+</android.support.design.widget.CoordinatorLayout>

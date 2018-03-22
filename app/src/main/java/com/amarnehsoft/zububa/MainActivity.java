@@ -1,14 +1,18 @@
 package com.amarnehsoft.zububa;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.amarnehsoft.zububa.activities.DashboardActivity;
 import com.amarnehsoft.zububa.dummy.Dummy;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
@@ -51,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
 
 //        dont use webService
 //        use the factory pattern
-
+/*
         BlogFBApi blogsApi = FBFactory.getBlogApi(true);
-        blogsApi.getList(new ICallBack<Blog>() {
+        blogsApi.getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 //got all approved blogs
                 for (Blog b : value){
-                    blogsApi.getLikes(b.getCode(), new ICallBack<Like>() {
+                    blogsApi.getLikes(b.getCode(), new IListCallBack<Like>() {
                         @Override
                         public void onResponse(List<Like> value) {
                             //likes for the blog
@@ -89,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 //error while getting the blogs
             }
         });
+        */
 
         Dummy.dummyScenario();
+    }
+
+    public void click(View view) {
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 }

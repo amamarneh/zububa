@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class GalleryItem extends Uploadable implements Parcelable{
     private String imgUrl,desc;
-
+    public final static int TYPE = 3;
     public GalleryItem() {
     }
 

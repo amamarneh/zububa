@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class Blog extends Uploadable implements Parcelable {
+    public final static int VIEW_TYPE = 2;
     private String title,content,imgUrl;
     private List<Like> likes;
     private List<Comment> comments;
