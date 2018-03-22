@@ -9,6 +9,7 @@ import com.amarnehsoft.zububa.abstractAdapters.Holder;
 import com.amarnehsoft.zububa.abstractAdapters.RecyclerAdapter;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.WebApi;
+import com.amarnehsoft.zububa.webapi.WebFactory;
 import com.amarnehsoft.zububa.webapi.WebService;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
@@ -23,7 +24,7 @@ import java.util.List;
 public class WeddingsListFragments extends ListFragment {
     @Override
     public void setupRecyclerViewAdapter() {
-        WebApi webApi = WebService.getInstance();
+        WebApi webApi = WebFactory.getWebService();
         webApi.getWeddings(new IListCallBack<Wedding>() {
             @Override
             public void onResponse(List<Wedding> value) {

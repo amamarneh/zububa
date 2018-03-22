@@ -25,6 +25,10 @@ import java.util.List;
  * Created by ALa on 3/22/2018.
  */
 
+/**
+ * NewsFeed Fragment
+ * it has multiple types of models
+ */
 public class PostListFragment extends ListFragment {
 
 
@@ -36,7 +40,8 @@ public class PostListFragment extends ListFragment {
                 ArrayList<MItem> arrayList = new ArrayList<>(value);
                 Taxi taxi = new Taxi();
                 taxi.setName("taxi1");
-
+                taxi.setDesc("description");
+                taxi.setPhone("059991234");
                 arrayList.add(taxi);
 
                 MyAdapter adapter = new MyAdapter(arrayList);
@@ -51,9 +56,7 @@ public class PostListFragment extends ListFragment {
     }
 
     @Override
-    protected void loadDataFromWeb() {
-
-    }
+    protected void loadDataFromWeb() {}
 
     private class PostHolder extends CustomHolder<Post>{
         private TextView tvDescription;
@@ -99,6 +102,7 @@ public class PostListFragment extends ListFragment {
                 mListener.onItemClicked(mItem);
         }
     }
+
     private class MyAdapter extends RecyclerAdapterMultipleTypes{
 
         public MyAdapter(List<MItem> items) {

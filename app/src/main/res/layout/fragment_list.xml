@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ProgressBar
-            android:minHeight="0dp"
+            android:minHeight="1dp"
             android:indeterminate="true"
             android:id="@+id/progressBarLoading"
             style="?android:attr/progressBarStyleHorizontal"

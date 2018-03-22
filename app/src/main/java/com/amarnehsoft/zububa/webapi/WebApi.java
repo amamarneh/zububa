@@ -2,6 +2,7 @@ package com.amarnehsoft.zububa.webapi;
 
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
@@ -23,7 +24,9 @@ public interface WebApi {
     void getWeddings(IListCallBack<Wedding> callBack); // get list of weddings
     void getGallery(IListCallBack<GalleryItem> callBack); // get list of gallery items
     void getBabies(IListCallBack<Baby> callBack); // get list of babies
-    void getPosts(IListCallBack<Post> callBack); // get list of posts
+    void getPosts(IListCallBack<Post> callBack); // get list of posts ( deprecated by getNewsFeed )
+
+    void getNewsFeed(IListCallBack<MItem> callBack);// get list of items for newsfeed (must have a type of MItem)
 
 
     /**

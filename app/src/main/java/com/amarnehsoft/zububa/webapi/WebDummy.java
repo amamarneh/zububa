@@ -3,6 +3,7 @@ package com.amarnehsoft.zububa.webapi;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
@@ -70,12 +71,17 @@ callBack.onResponse(weddings);
         Post post1 = new Post();
         post1.setContent("post content");
         Post post2 = new Post();
-        post2.setContent("post content");
+        post2.setContent("post content2");
 
         ArrayList<Post> list = new ArrayList<>();
         list.add(post1);
         list.add(post2);
         callBack.onResponse(list);
+    }
+
+    @Override
+    public void getNewsFeed(IListCallBack<MItem> callBack) {
+
     }
 
     @Override
