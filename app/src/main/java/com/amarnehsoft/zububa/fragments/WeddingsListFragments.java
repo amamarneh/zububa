@@ -11,6 +11,7 @@ import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.webapi.WebApi;
 import com.amarnehsoft.zububa.webapi.WebService;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +24,7 @@ public class WeddingsListFragments extends ListFragment {
     @Override
     public void setupRecyclerViewAdapter() {
         WebApi webApi = WebService.getInstance();
-        webApi.getWeddings(new ICallBack<Wedding>() {
+        webApi.getWeddings(new IListCallBack<Wedding>() {
             @Override
             public void onResponse(List<Wedding> value) {
                 MyAdapter adapter = new MyAdapter(value);

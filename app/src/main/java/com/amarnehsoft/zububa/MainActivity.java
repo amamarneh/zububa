@@ -9,6 +9,7 @@ import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
 import com.amarnehsoft.zububa.webapi.fb.FBFactory;
 import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
 //        use the factory pattern
 
         BlogFBApi blogsApi = FBFactory.getBlogApi(true);
-        blogsApi.getList(new ICallBack<Blog>() {
+        blogsApi.getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 //got all approved blogs
                 for (Blog b : value){
-                    blogsApi.getLikes(b.getCode(), new ICallBack<Like>() {
+                    blogsApi.getLikes(b.getCode(), new IListCallBack<Like>() {
                         @Override
                         public void onResponse(List<Like> value) {
                             //likes for the blog

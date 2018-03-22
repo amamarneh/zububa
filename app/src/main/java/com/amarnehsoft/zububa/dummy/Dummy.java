@@ -83,7 +83,7 @@ public class Dummy {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
-                    blogsApi.putLike(b.getCode(), new Like(new Date().getTime(), "assssddd"), (success)->{ if (success) Log.e("Amarneh","liked");});
+                    //blogsApi.putLike(b.getCode(), new Like(new Date().getTime(), null), (success)->{ if (success) Log.e("Amarneh","liked");});
                     blogsApi.putComment(b.getCode(), new Comment(new Date().getTime(), "sdsd", "ahmad", "", new Date().getTime(), "test comment"),(success)->{});
                 }
             }

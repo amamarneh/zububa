@@ -1,7 +1,11 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.amarnehsoft.zububa.utils.DeviceUtils;
+import com.amarnehsoft.zububa.utils.SystemUtils;
 
 /**
  * Created by user on 3/19/2018.
@@ -13,9 +17,9 @@ public class Like extends BaseModel implements Parcelable{
     public Like() {
     }
 
-    public Like(long creationDate, String macAddress) {
+    public Like(long creationDate, Context context) {
         super(creationDate);
-        this.macAddress = macAddress;
+        this.macAddress = SystemUtils.getDeviceId(context);
     }
 
     public Like(Parcel in) {

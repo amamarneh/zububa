@@ -47,16 +47,18 @@ public abstract class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_list, container, false);
+        // TODO: 3/22/2018
+//        return  inflater.inflate(R.layout.fragment_list, container, false);
+        return null;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mRecyclerView = view.findViewById(R.id.rv);
         mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh);
-        layoutMessage = view.findViewById(R.id.layoutMessage);
-        imgMessage = view.findViewById(R.id.imgMessage);
-        tvMessage = view.findViewById(R.id.tvMessage);
+//        layoutMessage = view.findViewById(R.id.layoutMessage);
+//        imgMessage = view.findViewById(R.id.imgMessage);
+//        tvMessage = view.findViewById(R.id.tvMessage);
 
         hideMessageLayout();
         initRecyclerView();

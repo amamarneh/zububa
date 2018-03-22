@@ -10,6 +10,7 @@ import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.webapi.WebApi;
 import com.amarnehsoft.zububa.webapi.WebService;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class TaxiListFragment extends ListFragment {
     @Override
     public void setupRecyclerViewAdapter() {
         WebApi webApi = WebService.getInstance();
-        webApi.getTaxiList(new ICallBack<Taxi>() {
+        webApi.getTaxiList(new IListCallBack<Taxi>() {
             @Override
             public void onResponse(List<Taxi> value) {
                 MyAdapter adapter = new MyAdapter(value);
