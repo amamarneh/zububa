@@ -1,20 +1,28 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.amarnehsoft.zububa.webapi.fb.GalleryFBApi;
 
 /**
  * Created by user on 3/19/2018.
  */
 
-public class GalleryItem extends Uploadable implements Parcelable{
+public class GalleryItem extends HasLikes implements Parcelable{
     private String imgUrl,desc;
 
-    public GalleryItem() {
+    public GalleryItem(){
+        super();
     }
 
-    public GalleryItem(long creationDate, String macAddress, String username, String adminCode, long approveDate, String imgUrl, String desc) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public GalleryItem(Context context) {
+        super(context);
+    }
+
+    public GalleryItem(Context context,String imgUrl, String desc) {
+        super(context);
         this.imgUrl = imgUrl;
         this.desc = desc;
     }

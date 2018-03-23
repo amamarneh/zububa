@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,14 +8,19 @@ import android.os.Parcelable;
  * Created by user on 3/19/2018.
  */
 
-public class Comment extends Uploadable implements Parcelable{
+public class Comment extends HasLikes implements Parcelable{
     private String comment;
 
-    public Comment() {
+    public Comment(){
+        super();
     }
 
-    public Comment(long creationDate, String macAddress, String username, String adminCode, long approveDate, String comment) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public Comment(Context context) {
+        super(context);
+    }
+
+    public Comment(Context context,String comment) {
+        super(context);
         this.comment = comment;
     }
 

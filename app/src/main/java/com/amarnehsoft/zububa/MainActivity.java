@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //test
-        Blog blog = new Blog();
+        Blog blog = new Blog(this);
         blog.setTitle("test title");
         blog.setContent("test content");
         blog.setImgUrl("image url");

@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,17 +8,22 @@ import android.os.Parcelable;
  * Created by user on 3/19/2018.
  */
 
-public class Baby extends Uploadable implements Parcelable{
+public class Baby extends HasComments implements Parcelable{
     private String name,imgUrl,desc;
 
-    public Baby(long creationDate, String macAddress, String username, String adminCode, boolean approved, long approveDate, String name, String imgUrl, String desc) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public Baby(Context context,String name, String imgUrl, String desc) {
+        super(context);
         this.name = name;
         this.imgUrl = imgUrl;
         this.desc = desc;
     }
 
-    public Baby() {
+    public Baby(Context context) {
+        super(context);
+    }
+
+    public Baby(){
+        super();
     }
 
     public Baby(Parcel in) {

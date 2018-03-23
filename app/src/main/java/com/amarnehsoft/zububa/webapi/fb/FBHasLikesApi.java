@@ -1,5 +1,8 @@
 package com.amarnehsoft.zububa.webapi.fb;
 
+import android.content.Context;
+
+import com.amarnehsoft.zububa.model.HasLikes;
 import com.amarnehsoft.zububa.model.Like;
 import com.amarnehsoft.zububa.model.Uprovable;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
@@ -16,25 +19,10 @@ import java.util.Date;
  * Created by user on 3/19/2018.
  */
 
-public abstract class FBHasLikesApi<T extends Uprovable> extends FBApi<T> implements IUprovable<T> {
+public abstract class FBHasLikesApi<T extends HasLikes> extends FBUprovableApi<T>{
 
-    protected abstract FB_REF getFB_REF();
-
-    protected boolean approved;
     public FBHasLikesApi(boolean approved){
-        this.approved = approved;
-    }
-
-    @Override
-    protected DatabaseReference getFBRef() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                .child(getFB_REF().name())
-                .child(FBConstants.VILLAGE_ZUBUBA);
-        if (approved){
-            return ref.child(FBConstants.APPROVED);
-        }else {
-            return ref.child(FBConstants.NOT_APPROVED);
-        }
+        super(approved);
     }
 
     @Override
@@ -47,19 +35,28 @@ public abstract class FBHasLikesApi<T extends Uprovable> extends FBApi<T> implem
         FBFactory.getLikesFBApi(getFB_REF(),childId).getList(callBack);
     }
 
-    public void putLike(String childId,Like like,ICompleteCallBack callBack){
-        FBFactory.getLikesFBApi(getFB_REF(),childId).saveItem(like,callBack);
+    public void putLike(T srcBean, Context context, ICompleteCallBack callBack){
+        putLike(srcBean,new Like(context),callBack);
     }
 
-    @Override
-    public void approve(T bean, ICompleteCallBack callBack) {
-        //delete and then push to approved
-        delete(bean.getCode(), (success)->{
+    public void putLike(T srcBean, Like like, ICompleteCallBack callBack){
+        //not accurate
+        // TODO: 3/23/2018
+        FBFactory.getLikesFBApi(getFB_REF(),srcBean.getCode()).saveItem(like,success -> {
             if (success){
-                bean.setAdminCode("admin");
-                bean.setApproveDate(new Date().getTime());
-                saveItem(bean,callBack);
-            }else {
+                srcBean.setLikesCount(srcBean.getLikesCount()+1);
+                saveItem(srcBean,callBack);
+            }else
+                callBack.completed(false);
+        });
+    }
+
+    public void deleteLike(T srcBean,String likeCode,ICompleteCallBack callBack){
+        FBFactory.getLikesFBApi(getFB_REF(),srcBean.getCode()).delete(likeCode,success -> {
+            if (success){
+                srcBean.setLikesCount(srcBean.getLikesCount()-1);
+                saveItem(srcBean,callBack);
+            } else{
                 callBack.completed(false);
             }
         });

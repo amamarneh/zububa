@@ -14,11 +14,12 @@ import com.amarnehsoft.zububa.utils.SystemUtils;
 public class Like extends BaseModel implements Parcelable{
     private String macAddress;
 
-    public Like() {
+    public Like(){
+        super();
     }
 
-    public Like(long creationDate, Context context) {
-        super(creationDate);
+    public Like(Context context) {
+        super();
         this.macAddress = SystemUtils.getDeviceId(context);
     }
 

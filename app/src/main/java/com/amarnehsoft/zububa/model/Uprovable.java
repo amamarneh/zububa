@@ -7,16 +7,12 @@ import android.os.Parcelable;
  * Created by user on 3/20/2018.
  */
 
-public class Uprovable extends BaseModel implements Parcelable{
+public abstract class Uprovable extends BaseModel implements Parcelable{
     private String adminCode; //if approved -> whos admin that approved this
     private long approveDate;
 
-    public Uprovable(){}
-
-    public Uprovable(long creationDate, String adminCode, long approveDate) {
-        super(creationDate);
-        this.adminCode = adminCode;
-        this.approveDate = approveDate;
+    public Uprovable() {
+        super();
     }
 
     public Uprovable(Parcel in) {

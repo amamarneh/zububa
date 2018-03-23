@@ -12,8 +12,8 @@ public class Village extends BaseModel implements Parcelable{
 
     public Village(){}
 
-    public Village(long creationDate, String name) {
-        super(creationDate);
+    public Village(String name) {
+        super();
         this.name = name;
     }
 

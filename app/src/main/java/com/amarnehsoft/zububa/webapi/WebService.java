@@ -123,7 +123,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendLikeForPost(Post post, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getPostFBApi(true).putLike(post.getCode(), new Like(new Date().getTime(), mContext), success -> {
+        FBFactory.getPostFBApi(true).putLike(post, mContext, success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -133,7 +133,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendLikeForBaby(Baby baby, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getBabyFBApi(true).putLike(baby.getCode(),new Like(new Date().getTime(),mContext),success -> {
+        FBFactory.getBabyFBApi(true).putLike(baby,mContext,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -143,7 +143,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendLikeForBlog(Blog blog, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getBlogApi(true).putLike(blog.getCode(),new Like(new Date().getTime(),mContext),success -> {
+        FBFactory.getBlogApi(true).putLike(blog,mContext,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -153,7 +153,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendLikeForGallery(GalleryItem galleryItem, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getGalleryFBApi(true).putLike(galleryItem.getCode(),new Like(new Date().getTime(),mContext),success -> {
+        FBFactory.getGalleryFBApi(true).putLike(galleryItem,mContext,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -163,7 +163,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendLikeForWedding(Wedding wedding, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getWeddingFBApi(true).putLike(wedding.getCode(),new Like(new Date().getTime(),mContext),success -> {
+        FBFactory.getWeddingFBApi(true).putLike(wedding,mContext,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -173,7 +173,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendCommentForPost(Post post, Comment comment, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getPostFBApi(true).putComment(post.getCode(),comment,success -> {
+        FBFactory.getPostFBApi(true).putComment(post,comment,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -183,7 +183,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendCommentForBaby(Baby baby, Comment comment, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getBabyFBApi(true).putComment(baby.getCode(),comment,success -> {
+        FBFactory.getBabyFBApi(true).putComment(baby,comment,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -193,7 +193,7 @@ public class WebService implements WebApi{
 
     @Override
     public void sendCommentForBlog(Blog blog, Comment comment, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getBlogApi(true).putComment(blog.getCode(),comment,success -> {
+        FBFactory.getBlogApi(true).putComment(blog,comment,success -> {
             if (success)
                 callBack.onResponse(true);
             else
@@ -209,13 +209,11 @@ public class WebService implements WebApi{
 
     @Override
     public void sendCommentForWedding(Wedding wedding, Comment comment, @Nullable ICallBack<Boolean> callBack) {
-        FBFactory.getWeddingFBApi(true).putComment(wedding.getCode(),comment,success -> {
+        FBFactory.getWeddingFBApi(true).putComment(wedding,comment,success -> {
             if (success)
                 callBack.onResponse(true);
             else
                 callBack.onResponse(false);
         });
     }
-
-
 }

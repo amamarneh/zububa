@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 
 import java.util.List;
@@ -8,33 +9,20 @@ import java.util.List;
  * Created by user on 3/19/2018.
  */
 
-public class Wedding extends Uploadable {
+public class Wedding extends HasComments {
     private String personName,title,content,imgUrl;
     private long weddingDate;
-    private List<Like> likes;
-    private List<Comment> comments;
 
-    public List<Like> getLikes() {
-        return likes;
+    public Wedding(){
+        super();
     }
 
-    public void setLikes(List<Like> likes) {
-        this.likes = likes;
+    public Wedding(Context context) {
+        super(context);
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Wedding() {
-    }
-
-    public Wedding(long creationDate, String macAddress, String username, String adminCode, long approveDate, String personName, String title, String content, String imgUrl, long weddingDate) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public Wedding(Context context,String personName, String title, String content, String imgUrl, long weddingDate) {
+        super(context);
         this.personName = personName;
         this.title = title;
         this.content = content;

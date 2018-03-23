@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,14 +8,19 @@ import android.os.Parcelable;
  * Created by user on 3/19/2018.
  */
 
-public class Taxi extends Uploadable implements Parcelable{
+public class Taxi extends HasComments implements Parcelable{
     private String name,desc,phone;
 
-    public Taxi() {
+    public Taxi(){
+        super();
     }
 
-    public Taxi(long creationDate, String macAddress, String username, String adminCode, long approveDate, String name, String desc, String phone) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public Taxi(Context context) {
+        super(context);
+    }
+
+    public Taxi(Context context,String name, String desc, String phone) {
+        super(context);
         this.name = name;
         this.desc = desc;
         this.phone = phone;

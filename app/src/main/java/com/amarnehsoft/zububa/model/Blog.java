@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,32 +10,18 @@ import java.util.List;
  * Created by user on 3/19/2018.
  */
 
-public class Blog extends Uploadable implements Parcelable {
+public class Blog extends HasComments implements Parcelable {
     private String title,content,imgUrl;
-    private List<Like> likes;
-    private List<Comment> comments;
 
-    public List<Like> getLikes() {
-        return likes;
+    public Blog(){
+        super();
+    }
+    public Blog(Context context) {
+        super(context);
     }
 
-    public void setLikes(List<Like> likes) {
-        this.likes = likes;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Blog() {
-    }
-
-    public Blog(long creationDate, String macAddress, String username, String adminCode, long approveDate, String title, String content, String imgUrl) {
-        super(creationDate, macAddress, username, adminCode, approveDate);
+    public Blog(Context context,String title, String content, String imgUrl) {
+        super(context);
         this.title = title;
         this.content = content;
         this.imgUrl = imgUrl;

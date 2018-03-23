@@ -10,10 +10,10 @@ import android.os.Parcelable;
 public class Admin extends BaseModel implements Parcelable{
     private String username,password,fullName;
 
-    public Admin(){}
+    public Admin(){super();}
 
-    public Admin(long creationDate, String username, String password, String fullName) {
-        super(creationDate);
+    public Admin(String username, String password, String fullName) {
+        super();
         this.username = username;
         this.password = password;
         this.fullName = fullName;

@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.dummy;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.amarnehsoft.zububa.model.Blog;
@@ -34,11 +35,11 @@ public class Dummy {
 //        case6();  ////delete the blogs and ites likes and comments
     }
 
-    private static void case1(){
+    private static void case1(Context context){
         //case1
         //create a blog and push it to not approved blogs
 
-        Blog b = new Blog(new Date().getTime(), "asd", "ahmad", "",0,"test title" , "test content", "");
+        Blog b = new Blog(context,"title", "content", "img");
         FBFactory.getBlogApi(false).saveItem(b, (success)-> {if (success) Log.e("Amarneh","saved successfully");} );
     }
 
@@ -76,15 +77,15 @@ public class Dummy {
         });
     }
 
-    private static void case4(){
+    private static void case4(Context context){
         //show approved and like it and add a comment
         BlogFBApi blogsApi = FBFactory.getBlogApi(true);
         blogsApi.getList(new IListCallBack<Blog>() {
             @Override
             public void onResponse(List<Blog> value) {
                 for (Blog b : value){
-                    //blogsApi.putLike(b.getCode(), new Like(new Date().getTime(), null), (success)->{ if (success) Log.e("Amarneh","liked");});
-                    blogsApi.putComment(b.getCode(), new Comment(new Date().getTime(), "sdsd", "ahmad", "", new Date().getTime(), "test comment"),(success)->{});
+                    blogsApi.putLike(b, context, (success)->{ if (success) Log.e("Amarneh","liked");});
+                    blogsApi.putComment(b, new Comment(context,"sdsd"),(success)->{});
                 }
             }
 

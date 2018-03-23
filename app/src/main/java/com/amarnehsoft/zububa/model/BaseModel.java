@@ -3,6 +3,7 @@ package com.amarnehsoft.zububa.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -17,11 +18,6 @@ public class BaseModel implements Parcelable{
         return UUID.randomUUID().toString();
     }
 
-    public BaseModel(long creationDate) {
-        this.creationDate = creationDate;
-        this.code = generateCode();
-    }
-
     protected BaseModel(Parcel in) {
         creationDate = in.readLong();
         code = in.readString();
@@ -29,6 +25,7 @@ public class BaseModel implements Parcelable{
 
     public BaseModel() {
         code = generateCode();
+        creationDate = new Date().getTime();
     }
 
     public static final Creator<BaseModel> CREATOR = new Creator<BaseModel>() {

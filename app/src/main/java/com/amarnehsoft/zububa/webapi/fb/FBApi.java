@@ -48,10 +48,12 @@ public abstract class FBApi<T extends BaseModel> implements API<T> {
 
     @Override
     public void saveItem(T item, ICompleteCallBack callBack) {
-        DatabaseReference ref;
+        saveItem(getFBRef(),item,callBack);
+    }
+
+    protected void saveItem(DatabaseReference ref,T item, ICompleteCallBack callBack) {
         try {
-            ref = getFBRef().child(item.getCode());
-            ref.setValue(item)
+            ref.child(item.getCode()).setValue(item)
                     .addOnSuccessListener(s->{callBack.completed(true);})
                     .addOnFailureListener(f->{callBack.completed(false);});
         }catch (Exception e){

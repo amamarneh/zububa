@@ -1,21 +1,27 @@
 package com.amarnehsoft.zububa.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.amarnehsoft.zububa.controllers.SPController;
+import com.amarnehsoft.zububa.utils.SystemUtils;
 
 /**
  * Created by user on 3/19/2018.
  */
 
-public class Uploadable extends Uprovable implements Parcelable{
+public abstract class Uploadable extends Uprovable implements Parcelable{
     private String macAddress,username; //if approved -> whos admin that approved this
 
-    public Uploadable(){}
+    public Uploadable(){
+        super();
+    }
 
-    public Uploadable(long creationDate, String macAddress, String username, String adminCode, long approveDate) {
-        super(creationDate,adminCode,approveDate);
-        this.macAddress = macAddress;
-        this.username = username;
+    public Uploadable(Context context) {
+        super();
+        this.macAddress = SystemUtils.getDeviceId(context);
+        this.username = SPController.getInstance(context).getLastName();
     }
 
     public Uploadable(Parcel in) {
