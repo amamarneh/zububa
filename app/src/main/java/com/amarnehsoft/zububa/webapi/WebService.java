@@ -223,5 +223,10 @@ public class WebService implements WebApi{
         });
     }
 
+    @Override
+    public void getComments(Object model, IListCallBack<Comment> callBack) {
+
+    }
+
 
 }

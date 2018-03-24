@@ -34,17 +34,10 @@ public class PostListFragment extends ListFragment {
 
     @Override
     public void setupRecyclerViewAdapter() {
-        WebFactory.getWebService().getPosts(new IListCallBack<Post>() {
+        WebFactory.getWebService().getNewsFeed(new IListCallBack<MItem>() {
             @Override
-            public void onResponse(List<Post> value) {
-                ArrayList<MItem> arrayList = new ArrayList<>(value);
-                Taxi taxi = new Taxi();
-                taxi.setName("taxi1");
-                taxi.setDesc("description");
-                taxi.setPhone("059991234");
-                arrayList.add(taxi);
-
-                MyAdapter adapter = new MyAdapter(arrayList);
+            public void onResponse(List<MItem> value) {
+                MyAdapter adapter = new MyAdapter(value);
                 mRecyclerView.setAdapter(adapter);
             }
 

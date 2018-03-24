@@ -26,7 +26,7 @@ public interface WebApi {
     void getBabies(IListCallBack<Baby> callBack); // get list of babies
     void getPosts(IListCallBack<Post> callBack); // get list of posts ( deprecated by getNewsFeed )
 
-    void getNewsFeed(IListCallBack<MItem> callBack);// get list of items for newsfeed (must have a type of MItem)
+    void getNewsFeed(IListCallBack<MItem> callBack);// get list of items for newsfeed (models must implement MItem)
 
 
     /**
@@ -62,6 +62,13 @@ public interface WebApi {
     void sendCommentForBlog(Blog blog, Comment comment,@Nullable ICallBack<Boolean> callBack);
     void sendCommentForGalley(GalleryItem galleryItem, Comment comment,@Nullable ICallBack<Boolean> callBack);
     void sendCommentForWedding(Wedding wedding, Comment comment,@Nullable ICallBack<Boolean> callBack);
+
+    void getBlogComments(Blog model, IListCallBack<Comment> callBack);
+    void getPostComments(Post model, IListCallBack<Comment> callBack);
+    void getBabyComments(Baby model, IListCallBack<Comment> callBack);
+    void getWeddingComments(Wedding model, IListCallBack<Comment> callBack);
+
+//    void getComments(Object model, IListCallBack<Comment> callBack);
 
 
     // ..

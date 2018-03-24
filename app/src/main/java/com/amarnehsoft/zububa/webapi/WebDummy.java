@@ -15,6 +15,7 @@ import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by ALa on 3/22/2018.
@@ -49,11 +50,15 @@ public class WebDummy implements WebApi {
 
     @Override
     public void getWeddings(IListCallBack<Wedding> callBack) {
-Wedding wedding = new Wedding();
-wedding.setPersonName("ALa");
-ArrayList<Wedding> weddings = new ArrayList<>();
-weddings.add(wedding);
-callBack.onResponse(weddings);
+        Wedding wedding = new Wedding();
+        wedding.setPersonName("ALa");
+        wedding.setContent("conconconcon");
+        wedding.setWeddingDate(new Date().getTime());
+        ArrayList<Wedding> weddings = new ArrayList<>();
+        weddings.add(wedding);
+        weddings.add(wedding);
+        weddings.add(wedding);
+        callBack.onResponse(weddings);
     }
 
     @Override
@@ -68,20 +73,31 @@ callBack.onResponse(weddings);
 
     @Override
     public void getPosts(IListCallBack<Post> callBack) {
+
+    }
+
+    @Override
+    public void getNewsFeed(IListCallBack<MItem> callBack) {
+        ArrayList<MItem> list = new ArrayList<>();
+
         Post post1 = new Post();
         post1.setContent("post content");
         Post post2 = new Post();
         post2.setContent("post content2");
 
-        ArrayList<Post> list = new ArrayList<>();
+
+        Taxi taxi = new Taxi();
+        taxi.setPhone("0599");
+        taxi.setName("ALa Taxi");
+        taxi.setDesc("description of my taxi");
+
+        list.add(taxi);
         list.add(post1);
+        list.add(taxi);
         list.add(post2);
+        list.add(taxi);
+
         callBack.onResponse(list);
-    }
-
-    @Override
-    public void getNewsFeed(IListCallBack<MItem> callBack) {
-
     }
 
     @Override
@@ -156,6 +172,11 @@ callBack.onResponse(weddings);
 
     @Override
     public void sendCommentForWedding(Wedding wedding, Comment comment, @Nullable ICallBack<Boolean> callBack) {
+
+    }
+
+    @Override
+    public void getComments(Object model, IListCallBack<Comment> callBack) {
 
     }
 }
