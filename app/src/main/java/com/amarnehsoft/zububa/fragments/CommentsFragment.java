@@ -2,8 +2,11 @@ package com.amarnehsoft.zububa.fragments;
 
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,11 +45,20 @@ public class CommentsFragment extends Fragment implements IListCallBack<Comment>
     private Button btnSend;
     private RecyclerView recyclerView;
     private ProgressBar progressBarLoading;
-    private Object mModel;
+    private Parcelable mModel;
     private int mType;
     private WebApi mWebApi = WebFactory.getWebService();
     private ICallBack<Boolean> commentListener;
     public CommentsFragment() {
+    }
+
+    public static Fragment newInstance(int type, Parcelable mModel){
+        Fragment fragment = new CommentsFragment();
+        Bundle args = new Bundle();
+        args.putInt("type",type);
+        args.putParcelable("model",mModel);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -77,10 +89,11 @@ public class CommentsFragment extends Fragment implements IListCallBack<Comment>
         //setup progress
         progressBarLoading.setVisibility(View.VISIBLE);
 
-        //setup listeners
+        //setup listeners ( when send a comment )
         commentListener = new ICallBack<Boolean>() {
             @Override
             public void onResponse(Boolean sent) {
+                progressBarLoading.setVisibility(View.GONE);
                 if(sent)
                     Toast.makeText(getContext(),"Sent",Toast.LENGTH_SHORT).show();
                 else
@@ -89,7 +102,8 @@ public class CommentsFragment extends Fragment implements IListCallBack<Comment>
 
             @Override
             public void onError(String err) {
-                    Toast.makeText(getContext(),err,Toast.LENGTH_SHORT).show();
+                progressBarLoading.setVisibility(View.GONE);
+                Toast.makeText(getContext(),err,Toast.LENGTH_SHORT).show();
             }
         };
 

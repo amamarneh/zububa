@@ -30,4 +30,5 @@ public class SPController {
     public void setLastName(String value){
         mSharedPreferences.edit().putString(ARG_LAST_NAME,value).apply();
     }
+
 }

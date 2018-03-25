@@ -23,6 +23,7 @@
             android:theme="@style/AppTheme.No">
 
         </activity>
+        <activity android:name=".activities.CommentsListActivity" />
     </application>
 
 </manifest>

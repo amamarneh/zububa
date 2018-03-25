@@ -1,5 +1,6 @@
 package com.amarnehsoft.zububa.fragments;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.amarnehsoft.zububa.abstractAdapters.CustomHolder;
 import com.amarnehsoft.zububa.abstractAdapters.Holder;
 import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.abstractAdapters.RecyclerAdapterMultipleTypes;
+import com.amarnehsoft.zububa.activities.CommentsListActivity;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
@@ -19,6 +21,7 @@ import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,13 +40,14 @@ public class PostListFragment extends ListFragment {
         WebFactory.getWebService().getNewsFeed(new IListCallBack<MItem>() {
             @Override
             public void onResponse(List<MItem> value) {
+                progressBarLoading.setVisibility(View.GONE);
                 MyAdapter adapter = new MyAdapter(value);
                 mRecyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onError(String err) {
-
+                progressBarLoading.setVisibility(View.GONE);
             }
         });
     }
@@ -53,18 +57,46 @@ public class PostListFragment extends ListFragment {
 
     private class PostHolder extends CustomHolder<Post>{
         private TextView tvDescription;
+        private TextView tvDate;
+        private View layoutComment;
         private ImageView imageView;
+        private ImageView imgLove;
+
+        private boolean loved = false;
         public PostHolder(View itemView) {
             super(itemView);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             imageView = itemView.findViewById(R.id.imageView);
+            layoutComment = itemView.findViewById(R.id.layoutComment);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            imgLove = itemView.findViewById(R.id.imgLove);
         }
 
         @Override
         public void renderItem(Post item) {
             super.renderItem(item);
+            tvDate.setText(new Date(item.getCreationDate()).toString());
             tvDescription.setText(item.getContent());
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
+
+            if(loved)
+                imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
+            else
+                imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+            layoutComment.setOnClickListener( v -> {
+                // TODO: 3/25/2018 code on the run
+                Intent i =  CommentsListActivity.getIntent(getContext(),CommentsFragment.TYPE_POST,mItem);
+                startActivity(i);
+            });
+            imgLove.setOnClickListener( v -> {
+                loved = !loved;
+                if(loved)
+                    imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
+                else
+                    imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+            });
         }
 
         @Override

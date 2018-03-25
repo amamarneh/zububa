@@ -81,8 +81,10 @@ public class WebDummy implements WebApi {
         ArrayList<MItem> list = new ArrayList<>();
 
         Post post1 = new Post();
+        post1.setImgUrl("https://www.owlstalk.co.uk/forums/uploads/monthly_2018_01/post.jpg.afa4665cc9a85cd8275d5bd50658cf00.jpg");
         post1.setContent("post content");
         Post post2 = new Post();
+        post2.setImgUrl("https://www.owlstalk.co.uk/forums/uploads/monthly_2018_01/post.jpg.afa4665cc9a85cd8275d5bd50658cf00.jpg");
         post2.setContent("post content2");
 
 
