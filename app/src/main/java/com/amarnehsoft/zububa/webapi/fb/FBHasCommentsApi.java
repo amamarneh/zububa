@@ -8,6 +8,8 @@ import com.amarnehsoft.zububa.webapi.callBacks.ICompleteCallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
 
+import java.util.HashMap;
+
 /**
  * Created by user on 3/19/2018.
  */
@@ -19,12 +21,13 @@ public abstract class FBHasCommentsApi<T extends HasComments> extends FBHasLikes
     }
 
     @Override
-    public void delete(String childId, ICompleteCallBack callBack) {
-        super.delete(childId,callBack);
-        FBFactory.getCommentsFBApi(getFB_REF(),childId,true).deleteAllInRef(callBack);
+    protected HashMap<String, Object> getHashMapToDelete(String childId) {
+        HashMap<String,Object> map = super.getHashMapToDelete(childId);
+        map.putAll(FBFactory.getCommentsFBApi(getFB_REF(),childId,true).getHasMapToDeleteAllApprovedAndNotApprovedInRef());
+        return map;
     }
 
-    public void getComments(String childId,boolean approved,IListCallBack<Comment> callBack){
+    public void getComments(String childId, boolean approved, IListCallBack<Comment> callBack){
         FBFactory.getCommentsFBApi(getFB_REF(),childId,approved).getList(callBack);
     }
 
@@ -51,6 +54,8 @@ public abstract class FBHasCommentsApi<T extends HasComments> extends FBHasLikes
     }
 
     public void deleteComment(T srcBean,String commentCode,boolean commentApproved,ICompleteCallBack callBack){
+        // TODO: 3/24/2018
+        //need a transaction
         FBFactory.getCommentsFBApi(getFB_REF(),srcBean.getCode(),commentApproved).delete(commentCode,success -> {
             if (success){
                 if (commentApproved){

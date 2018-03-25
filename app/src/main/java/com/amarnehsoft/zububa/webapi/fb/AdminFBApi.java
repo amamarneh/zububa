@@ -14,10 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AdminFBApi extends FBApi<Admin> {
 
     @Override
-    protected DatabaseReference getFBRef() {
-        return FirebaseDatabase.getInstance().getReference()
-                .child(FB_REF.users.name())
-                .child(FBConstants.USER_ADMIN);
+    protected String getFBRefString() {
+        return FB_REF.users.name() + separator + FBConstants.USER_ADMIN;
     }
 
     @Override

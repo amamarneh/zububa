@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by user on 3/19/2018.
@@ -26,12 +27,13 @@ public abstract class FBHasLikesApi<T extends HasLikes> extends FBUprovableApi<T
     }
 
     @Override
-    public void delete(String childId, ICompleteCallBack callBack) {
-        super.delete(childId,callBack);
-        FBFactory.getLikesFBApi(getFB_REF(),childId).deleteAllInRef(callBack);
+    protected HashMap<String, Object> getHashMapToDelete(String childId) {
+        HashMap<String,Object> map = super.getHashMapToDelete(childId);
+        map.putAll(FBFactory.getLikesFBApi(getFB_REF(),childId).getHashMapToDeleteAll());
+        return map;
     }
 
-    public void getLikes(String childId,IListCallBack<Like> callBack){
+    public void getLikes(String childId, IListCallBack<Like> callBack){
         FBFactory.getLikesFBApi(getFB_REF(),childId).getList(callBack);
     }
 
@@ -41,6 +43,7 @@ public abstract class FBHasLikesApi<T extends HasLikes> extends FBUprovableApi<T
 
     public void putLike(T srcBean, Like like, ICompleteCallBack callBack){
         //not accurate
+        //need to be encapsulated in a transaction
         // TODO: 3/23/2018
         FBFactory.getLikesFBApi(getFB_REF(),srcBean.getCode()).saveItem(like,success -> {
             if (success){

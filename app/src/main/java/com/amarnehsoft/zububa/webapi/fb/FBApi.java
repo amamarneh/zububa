@@ -2,27 +2,35 @@ package com.amarnehsoft.zububa.webapi.fb;
 
 import com.amarnehsoft.zububa.model.BaseModel;
 import com.amarnehsoft.zububa.webapi.API;
-import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.ICompleteCallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
+import com.amarnehsoft.zububa.webapi.fb.constants.FBConstants;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by user on 3/19/2018.
  */
 
 public abstract class FBApi<T extends BaseModel> implements API<T> {
+    protected String separator = "/";
 
-    protected abstract DatabaseReference getFBRef();
-
+    protected abstract String getFBRefString();
     protected abstract Class<T> getEntityClass();
 
+
+    protected DatabaseReference getFBRef(){
+        return FirebaseDatabase.getInstance().getReference(getFBRefString());
+    }
 
     @Override
     public void getList(final IListCallBack<T> callBack) {
@@ -47,36 +55,41 @@ public abstract class FBApi<T extends BaseModel> implements API<T> {
     }
 
     @Override
-    public void saveItem(T item, ICompleteCallBack callBack) {
-        saveItem(getFBRef(),item,callBack);
-    }
-
-    protected void saveItem(DatabaseReference ref,T item, ICompleteCallBack callBack) {
-        try {
-            ref.child(item.getCode()).setValue(item)
-                    .addOnSuccessListener(s->{callBack.completed(true);})
-                    .addOnFailureListener(f->{callBack.completed(false);});
-        }catch (Exception e){
-            callBack.completed(false);
-        }
+    public void saveItem(T item, ICompleteCallBack callBack)
+    {
+        FirebaseDatabase.getInstance().getReference().updateChildren(getHashMapToSave(item))
+                .addOnSuccessListener(s->{callBack.completed(true);})
+                .addOnFailureListener(f->{callBack.completed(false);});
     }
 
     @Override
     public void delete(String childId, ICompleteCallBack callBack) {
-        delete(getFBRef().child(childId),callBack);
+        FirebaseDatabase.getInstance().getReference().updateChildren(getHashMapToDelete(childId))
+                .addOnSuccessListener(s->{callBack.completed(true);})
+                .addOnFailureListener(s->{callBack.completed(false);});
     }
 
-    public void deleteAllInRef(ICompleteCallBack callBack){
-        delete(getFBRef(),callBack);
+    public Task<Void> deleteAllInRef(ICompleteCallBack callBack){
+        return FirebaseDatabase.getInstance().getReference().updateChildren(getHashMapToDeleteAll())
+                .addOnSuccessListener(s->{callBack.completed(true);})
+                .addOnFailureListener(f->{callBack.completed(false);});
     }
 
-    protected void delete(DatabaseReference ref,ICompleteCallBack callBack){
-        try {
-            ref.removeValue()
-                    .addOnSuccessListener(s->{callBack.completed(true);})
-                    .addOnFailureListener(f->{callBack.completed(false);});
-        }catch (Exception e){
-                callBack.completed(false);
-        }
+    protected HashMap<String,Object> getHashMapToSave(T item) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put(getFBRefString() + separator + item.getCode(),item);
+        return map;
+    }
+
+    protected HashMap<String,Object> getHashMapToDelete(String childId){
+        HashMap map = new HashMap<String,Object>();
+        map.put(getFBRefString() + separator + childId,null);
+        return map;
+    }
+
+    protected HashMap<String,Object> getHashMapToDeleteAll(){
+        HashMap map = new HashMap<String,Object>();
+        map.put(getFBRefString(),null);
+        return map;
     }
 }

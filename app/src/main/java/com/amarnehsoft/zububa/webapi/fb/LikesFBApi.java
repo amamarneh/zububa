@@ -21,12 +21,8 @@ public class LikesFBApi extends FBApi<Like> {
     }
 
     @Override
-    protected DatabaseReference getFBRef() {
-            return FirebaseDatabase.getInstance().getReference()
-                    .child(FB_REF.likes.name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(ref)
-                    .child(childId);
+    protected String getFBRefString() {
+        return FB_REF.likes.name() + separator + FBConstants.VILLAGE_ZUBUBA + separator + ref + separator + childId;
     }
 
     @Override

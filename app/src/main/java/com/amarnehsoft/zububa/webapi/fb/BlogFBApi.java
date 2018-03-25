@@ -10,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 3/19/2018.
  */
 
-public class BlogFBApi extends FBHasCommentsApi<Blog> implements IUprovable<Blog> {
+public class BlogFBApi extends FBHasCommentsApi<Blog>{
 
     public BlogFBApi(boolean approved) {
         super(approved);

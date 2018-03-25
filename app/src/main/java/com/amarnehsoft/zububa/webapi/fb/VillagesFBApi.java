@@ -16,9 +16,8 @@ import java.sql.Ref;
 public class VillagesFBApi extends FBApi<Village> {
 
     @Override
-    protected DatabaseReference getFBRef() {
-        return FirebaseDatabase.getInstance().getReference()
-                .child(FB_REF.villages.name());
+    protected String getFBRefString() {
+        return FB_REF.villages.name();
     }
 
     @Override

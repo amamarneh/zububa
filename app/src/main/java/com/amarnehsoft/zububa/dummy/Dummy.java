@@ -109,7 +109,7 @@ public class Dummy {
                         public void onResponse(List<Comment> value) {
                             for (Comment comment : value){
                                 Log.e("Amarneh","not approved comment:"+comment.getComment());
-                                FBFactory.getBlogApi(true).approveComment(blog.getCode(), comment, success -> {});
+                                FBFactory.getBlogApi(true).approveComment(blog, comment, success -> {});
                             }
                         }
 

@@ -24,19 +24,13 @@ public class CommentFBApi extends FBHasLikesApi<Comment> {
     }
 
     @Override
-    protected DatabaseReference getFBRef() {
-
-        DatabaseReference r = FirebaseDatabase.getInstance().getReference()
-                    .child(getFB_REF().name())
-                    .child(FBConstants.VILLAGE_ZUBUBA)
-                    .child(ref)
-                    .child(childId);
+    protected String getFBRefString() {
+        String path = getFB_REF().name() + separator + FBConstants.VILLAGE_ZUBUBA + separator + ref + separator + childId + separator;
         if (approved)
-            r = r.child(FBConstants.APPROVED);
+            path+=FBConstants.APPROVED;
         else
-            r = r.child(FBConstants.NOT_APPROVED);
-
-        return r;
+            path+=FBConstants.NOT_APPROVED;
+        return path;
     }
 
     @Override
