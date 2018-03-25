@@ -2,7 +2,7 @@ package com.amarnehsoft.zububa.core;
 
 import android.app.Application;
 
-import com.amarnehsoft.zububa.utils.SystemUtils;
+import com.amarnehsoft.zububa.webapi.WebDummy;
 import com.amarnehsoft.zububa.webapi.WebService;
 
 /**
@@ -16,5 +16,6 @@ public class FireApp extends Application{
 
         // initialize WebService
         WebService.init(getApplicationContext());
+        WebDummy.init(getApplicationContext());
     }
 }

@@ -10,8 +10,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.amarnehsoft.zububa.R;
+import com.amarnehsoft.zububa.fragments.ListFragment;
+import com.amarnehsoft.zububa.fragments.PostListFragment;
+import com.amarnehsoft.zububa.fragments.TaxiListFragment;
+import com.amarnehsoft.zububa.fragments.WeddingsListFragments;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements ListFragment.IFragmentListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -33,6 +37,11 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClicked(Object item) {
+
+    }
+
     // TODO: 3/21/2018 when fragments done
     // For Tabs
     class FragmentAdapter extends FragmentPagerAdapter {
@@ -43,10 +52,10 @@ public class DashboardActivity extends AppCompatActivity {
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             switch (position){
-//                case 0:
-//                    return new HomeFragment();
-//                case 1:
-//                    return new NewsFragment();
+                case 0:
+                    return new PostListFragment();
+                case 1:
+                    return new WeddingsListFragments();
             }
             return null;
         }
@@ -62,9 +71,9 @@ public class DashboardActivity extends AppCompatActivity {
                 //
                 //Your tab titles
                 //
-                case 0:return "Blog";
+                case 0:return "Posts";
                 case 1:return "Weddings";
-                case 2:return "Taxi";
+                case 2:return "";
                 default:return null;
             }
         }

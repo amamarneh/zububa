@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
+
 /**
  * Created by user on 3/19/2018.
  */
 
-public class Taxi extends HasComments implements Parcelable{
+public class Taxi extends HasComments implements Parcelable,MItem {
+    public final static int VIEW_TYPE = 3;
     private String name,desc,phone;
 
     public Taxi(){
@@ -63,5 +66,10 @@ public class Taxi extends HasComments implements Parcelable{
         parcel.writeString(name);
         parcel.writeString(desc);
         parcel.writeString(phone);
+    }
+
+    @Override
+    public int getViewType() {
+        return VIEW_TYPE;
     }
 }

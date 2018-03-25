@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class Blog extends HasComments implements Parcelable {
+    public final static int VIEW_TYPE = 2;
     private String title,content,imgUrl;
 
     public Blog(){

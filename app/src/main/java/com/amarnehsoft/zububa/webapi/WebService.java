@@ -3,6 +3,7 @@ package com.amarnehsoft.zububa.webapi;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
@@ -69,6 +70,11 @@ public class WebService implements WebApi{
     @Override
     public void getPosts(IListCallBack<Post> callBack) {
         FBFactory.getPostFBApi(true).getList(callBack);
+    }
+
+    @Override
+    public void getNewsFeed(IListCallBack<MItem> callBack) {
+
     }
 
     @Override
@@ -216,4 +222,11 @@ public class WebService implements WebApi{
                 callBack.onResponse(false);
         });
     }
+
+    @Override
+    public void getComments(Object model, IListCallBack<Comment> callBack) {
+
+    }
+
+
 }

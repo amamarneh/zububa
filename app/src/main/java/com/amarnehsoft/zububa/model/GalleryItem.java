@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.amarnehsoft.zububa.webapi.fb.GalleryFBApi;
 
 /**
  * Created by user on 3/19/2018.
@@ -12,10 +11,12 @@ import com.amarnehsoft.zububa.webapi.fb.GalleryFBApi;
 
 public class GalleryItem extends HasLikes implements Parcelable{
     private String imgUrl,desc;
+    public final static int TYPE = 3;
 
-    public GalleryItem(){
+    public GalleryItem() {
         super();
     }
+
 
     public GalleryItem(Context context) {
         super(context);

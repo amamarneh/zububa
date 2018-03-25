@@ -4,14 +4,17 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
+
 import java.util.List;
 
 /**
  * Created by user on 3/19/2018.
  */
 
-public class Post extends HasComments implements Parcelable{
+public class Post extends HasComments implements Parcelable,MItem{
 
+    public static final int VIEW_TYPE= 1;
     public static final int TYPE_POST= 0;
     public static final int TYPE_AD =1;
 
@@ -83,5 +86,10 @@ public class Post extends HasComments implements Parcelable{
         parcel.writeString(content);
         parcel.writeString(imgUrl);
         parcel.writeInt(type);
+    }
+
+    @Override
+    public int getViewType() {
+        return VIEW_TYPE;
     }
 }

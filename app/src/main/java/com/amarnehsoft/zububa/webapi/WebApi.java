@@ -2,6 +2,7 @@ package com.amarnehsoft.zububa.webapi;
 
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
@@ -23,7 +24,9 @@ public interface WebApi {
     void getWeddings(IListCallBack<Wedding> callBack); // get list of weddings
     void getGallery(IListCallBack<GalleryItem> callBack); // get list of gallery items
     void getBabies(IListCallBack<Baby> callBack); // get list of babies
-    void getPosts(IListCallBack<Post> callBack); // get list of posts
+    void getPosts(IListCallBack<Post> callBack); // get list of posts ( deprecated by getNewsFeed )
+
+    void getNewsFeed(IListCallBack<MItem> callBack);// get list of items for newsfeed (models must implement MItem)
 
 
     /**
@@ -59,6 +62,13 @@ public interface WebApi {
     void sendCommentForBlog(Blog blog, Comment comment,@Nullable ICallBack<Boolean> callBack);
     void sendCommentForGalley(GalleryItem galleryItem, Comment comment,@Nullable ICallBack<Boolean> callBack);
     void sendCommentForWedding(Wedding wedding, Comment comment,@Nullable ICallBack<Boolean> callBack);
+
+    void getBlogComments(Blog model, IListCallBack<Comment> callBack);
+    void getPostComments(Post model, IListCallBack<Comment> callBack);
+    void getBabyComments(Baby model, IListCallBack<Comment> callBack);
+    void getWeddingComments(Wedding model, IListCallBack<Comment> callBack);
+
+//    void getComments(Object model, IListCallBack<Comment> callBack);
 
 
     // ..
