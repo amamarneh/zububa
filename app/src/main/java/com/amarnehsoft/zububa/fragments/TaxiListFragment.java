@@ -59,7 +59,7 @@ public class TaxiListFragment extends ListFragment {
         }
 
         @Override
-        public void onClicked(View v) {
+        public void onClick(View v) {
             if(mListener != null)
                 mListener.onItemClicked(mItem);
         }

@@ -42,7 +42,7 @@ public class BlogListFragment extends ListFragmentWithAdapter<Blog> {
         }
 
         @Override
-        public void onClicked(View v) {
+        public void onClick(View v) {
 
         }
 

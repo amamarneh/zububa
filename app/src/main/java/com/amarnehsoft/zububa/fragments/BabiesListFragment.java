@@ -41,15 +41,15 @@ public class BabiesListFragment extends ListFragmentWithAdapter<Baby> {
         }
 
         @Override
-        public void onClicked(View v) {
-
-        }
-
-        @Override
         public void bind(Baby item, int pos) {
             super.bind(item, pos);
             tvDescription.setText(item.getDesc());
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }

@@ -15,13 +15,6 @@ public abstract class Holder<T> extends RecyclerView.ViewHolder implements View.
         itemView.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        onClicked(v);
-    }
-
-    public abstract void onClicked(View v);
-
     public void bind(T item, int pos){
         mItem = item;
     }

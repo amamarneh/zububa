@@ -161,7 +161,7 @@ public class CommentsFragment extends Fragment implements IListCallBack<Comment>
         }
 
         @Override
-        public void onClicked(View v) {
+        public void onClick(View v) {
         }
     }
     class MyAdapter extends RecyclerAdapter<Comment>{

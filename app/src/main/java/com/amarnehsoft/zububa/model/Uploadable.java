@@ -12,7 +12,7 @@ import com.amarnehsoft.zububa.utils.SystemUtils;
  */
 
 public abstract class Uploadable extends Uprovable implements Parcelable{
-    private String macAddress,username; //if approved -> whos admin that approved this
+    private String macAddress,username;
 
     public Uploadable(){
         super();

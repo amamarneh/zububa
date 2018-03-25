@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
-        Dummy.dummyScenario();
+        //Dummy.dummyScenario();
     }
 
     public void click(View view) {

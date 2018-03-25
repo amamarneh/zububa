@@ -224,8 +224,23 @@ public class WebService implements WebApi{
     }
 
     @Override
-    public void getComments(Object model, IListCallBack<Comment> callBack) {
+    public void getBlogComments(Blog model, IListCallBack<Comment> callBack) {
+        FBFactory.getBlogApi(true).getComments(model.getCode(),true,callBack);
+    }
 
+    @Override
+    public void getPostComments(Post model, IListCallBack<Comment> callBack) {
+        FBFactory.getPostFBApi(true).getComments(model.getCode(),true,callBack);
+    }
+
+    @Override
+    public void getBabyComments(Baby model, IListCallBack<Comment> callBack) {
+        FBFactory.getBabyFBApi(true).getComments(model.getCode(),true,callBack);
+    }
+
+    @Override
+    public void getWeddingComments(Wedding model, IListCallBack<Comment> callBack) {
+        FBFactory.getWeddingFBApi(true).getComments(model.getCode(),true,callBack);
     }
 
 

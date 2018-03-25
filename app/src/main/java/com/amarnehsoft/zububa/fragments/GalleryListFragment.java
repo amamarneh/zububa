@@ -41,7 +41,7 @@ public class GalleryListFragment extends ListFragmentWithAdapter<GalleryItem> {
         }
 
         @Override
-        public void onClicked(View v) {
+        public void onClick(View v) {
 
         }
 

@@ -176,7 +176,22 @@ public class WebDummy implements WebApi {
     }
 
     @Override
-    public void getComments(Object model, IListCallBack<Comment> callBack) {
+    public void getBlogComments(Blog model, IListCallBack<Comment> callBack) {
+
+    }
+
+    @Override
+    public void getPostComments(Post model, IListCallBack<Comment> callBack) {
+
+    }
+
+    @Override
+    public void getBabyComments(Baby model, IListCallBack<Comment> callBack) {
+
+    }
+
+    @Override
+    public void getWeddingComments(Wedding model, IListCallBack<Comment> callBack) {
 
     }
 }
