@@ -3,6 +3,9 @@ package com.amarnehsoft.zububa.controllers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.amarnehsoft.zububa.model.BaseModel;
+import com.amarnehsoft.zububa.model.Post;
+
 /**
  * Created by user on 3/22/2018.
  */
@@ -29,6 +32,16 @@ public class SPController {
 
     public void setLastName(String value){
         mSharedPreferences.edit().putString(ARG_LAST_NAME,value).apply();
+    }
+
+    public static void setLikeForPost(Context context, BaseModel model){
+        SharedPreferences sp =  context.getSharedPreferences("model_likes",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean(model.getCode(),true);
+    }
+    public static boolean isLiked(Context context, BaseModel model){
+        SharedPreferences sp =  context.getSharedPreferences("model_likes",Context.MODE_PRIVATE);
+        return sp.getBoolean(model.getCode(),false);
     }
 
 }

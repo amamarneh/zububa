@@ -13,9 +13,11 @@ import com.amarnehsoft.zububa.abstractAdapters.Holder;
 import com.amarnehsoft.zububa.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.abstractAdapters.RecyclerAdapterMultipleTypes;
 import com.amarnehsoft.zububa.activities.CommentsListActivity;
+import com.amarnehsoft.zububa.controllers.SPController;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
+import com.amarnehsoft.zububa.webapi.WebApi;
 import com.amarnehsoft.zububa.webapi.WebFactory;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
 import com.bumptech.glide.Glide;
@@ -33,11 +35,11 @@ import java.util.List;
  * it has multiple types of models
  */
 public class PostListFragment extends ListFragment {
-
+    private WebApi mWebApi = WebFactory.getWebService();
 
     @Override
     public void setupRecyclerViewAdapter() {
-        WebFactory.getWebService().getNewsFeed(new IListCallBack<MItem>() {
+        mWebApi.getNewsFeed(new IListCallBack<MItem>() {
             @Override
             public void onResponse(List<MItem> value) {
                 progressBarLoading.setVisibility(View.GONE);
@@ -79,22 +81,23 @@ public class PostListFragment extends ListFragment {
             tvDescription.setText(item.getContent());
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
 
+            loved = SPController.isLiked(itemView.getContext(),mItem);
+
             if(loved)
                 imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
             else
                 imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
             layoutComment.setOnClickListener( v -> {
-                // TODO: 3/25/2018 code on the run
                 Intent i =  CommentsListActivity.getIntent(getContext(),CommentsFragment.TYPE_POST,mItem);
                 startActivity(i);
             });
             imgLove.setOnClickListener( v -> {
-                loved = !loved;
-                if(loved)
+                SPController.setLikeForPost(itemView.getContext(),mItem);
+
                     imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
-                else
-                    imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    mWebApi.sendLikeForPost(mItem,null);
+
 
             });
         }

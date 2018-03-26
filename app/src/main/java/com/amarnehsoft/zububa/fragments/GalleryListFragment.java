@@ -27,6 +27,11 @@ public class GalleryListFragment extends ListFragmentWithAdapter<GalleryItem> {
     }
 
     @Override
+    protected int getNumberOfCols() {
+        return 2;
+    }
+
+    @Override
     protected void loadDataFromWeb() {
         WebFactory.getWebService().getGallery(this);
     }
