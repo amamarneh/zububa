@@ -8,6 +8,7 @@ import com.amarnehsoft.zububa.abstractAdapters.Holder;
 import com.amarnehsoft.zububa.abstractAdapters.RecyclerAdapter;
 import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.webapi.WebApi;
+import com.amarnehsoft.zububa.webapi.WebFactory;
 import com.amarnehsoft.zububa.webapi.WebService;
 import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
@@ -21,16 +22,18 @@ import java.util.List;
 public class TaxiListFragment extends ListFragment {
     @Override
     public void setupRecyclerViewAdapter() {
-        WebApi webApi = WebService.getInstance();
+        WebApi webApi = WebFactory.getWebService();
         webApi.getTaxiList(new IListCallBack<Taxi>() {
             @Override
             public void onResponse(List<Taxi> value) {
+                progressBarLoading.setVisibility(View.GONE);
                 MyAdapter adapter = new MyAdapter(value);
                 mRecyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onError(String err) {
+                progressBarLoading.setVisibility(View.GONE);
 
             }
         });
@@ -60,6 +63,7 @@ public class TaxiListFragment extends ListFragment {
 
         @Override
         public void onClick(View v) {
+            tvDescription.setVisibility(tvDescription.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE);
             if(mListener != null)
                 mListener.onItemClicked(mItem);
         }

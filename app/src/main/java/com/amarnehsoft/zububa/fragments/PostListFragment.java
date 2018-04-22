@@ -1,6 +1,7 @@
 package com.amarnehsoft.zububa.fragments;
 
 import android.content.Intent;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.amarnehsoft.zububa.controllers.SPController;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Post;
 import com.amarnehsoft.zububa.model.Taxi;
+import com.amarnehsoft.zububa.utils.DateUtil;
 import com.amarnehsoft.zububa.webapi.WebApi;
 import com.amarnehsoft.zububa.webapi.WebFactory;
 import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
@@ -77,7 +79,7 @@ public class PostListFragment extends ListFragment {
         @Override
         public void renderItem(Post item) {
             super.renderItem(item);
-            tvDate.setText(new Date(item.getCreationDate()).toString());
+            tvDate.setText(DateUtils.getRelativeTimeSpanString(item.getCreationDate()));
             tvDescription.setText(item.getContent());
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
 

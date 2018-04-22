@@ -8,38 +8,49 @@
 
 
     <android.support.design.widget.AppBarLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
+
             android:layout_width="match_parent"
             app:contentScrim="?attr/colorPrimary"
             android:fitsSystemWindows="true"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:layout_scrollFlags="scroll|enterAlways"
             android:layout_height="wrap_content">
+            <ImageView
+                android:alpha=".3"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                android:src="@drawable/zububa_art"
+                android:layout_width="match_parent"
+                android:layout_height="130dp" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
             </android.support.v7.widget.Toolbar>
 
             <ImageView
+                android:tint="@color/white"
                 app:layout_collapseMode="parallax"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="70dp"
-                android:layout_height="70dp" />
+                android:src="@drawable/zububa"
+                android:layout_width="match_parent"
+                android:layout_height="110dp" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
         <Button
+            android:visibility="gone"
             android:id="@+id/btnView"
             android:layout_gravity="center"
             android:text="View Zububa"

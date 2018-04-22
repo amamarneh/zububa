@@ -5,5 +5,7 @@ package com.amarnehsoft.zububa.abstractAdapters;
  */
 
 public interface MItem{
+    int TYPE_POST=1;
+    int TYPE_TAXI=2;
     int getViewType();
 }

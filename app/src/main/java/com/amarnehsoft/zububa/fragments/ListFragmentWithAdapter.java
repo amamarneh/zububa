@@ -19,14 +19,19 @@ import java.util.List;
  */
 
 public abstract class ListFragmentWithAdapter<T> extends ListFragment implements IListCallBack<T>{
+    protected List<T> mItems;
     @Override
     public void onResponse(List<T> value) {
+        mItems = value;
         MyAdapter adapter = new MyAdapter(value);
         mRecyclerView.setAdapter(adapter);
+
+        progressBarLoading.setVisibility(View.GONE);
     }
 
     @Override
     public void onError(String err) {
+        progressBarLoading.setVisibility(View.GONE);
 
     }
 

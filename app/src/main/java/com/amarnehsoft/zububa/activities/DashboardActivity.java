@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.amarnehsoft.zububa.R;
+import com.amarnehsoft.zububa.fragments.GalleryListFragment;
 import com.amarnehsoft.zububa.fragments.ListFragment;
 import com.amarnehsoft.zububa.fragments.PostListFragment;
 import com.amarnehsoft.zububa.fragments.TaxiListFragment;
 import com.amarnehsoft.zububa.fragments.WeddingsListFragments;
+import com.amarnehsoft.zububa.model.Wedding;
 
-public class DashboardActivity extends AppCompatActivity implements ListFragment.IFragmentListener {
+public class DashboardActivity extends AppCompatActivity implements ListFragment.IFragmentListener,WeddingsListFragments.IListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -42,6 +44,11 @@ public class DashboardActivity extends AppCompatActivity implements ListFragment
 
     }
 
+    @Override
+    public void onWeddingClicked(Wedding wedding) {
+
+    }
+
     // TODO: 3/21/2018 when fragments done
     // For Tabs
     class FragmentAdapter extends FragmentPagerAdapter {
@@ -56,13 +63,17 @@ public class DashboardActivity extends AppCompatActivity implements ListFragment
                     return new PostListFragment();
                 case 1:
                     return new WeddingsListFragments();
+                case 2:
+                    return new TaxiListFragment();
+                case 3:
+                    return new GalleryListFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 4;
         }
 
         @Override
@@ -73,7 +84,8 @@ public class DashboardActivity extends AppCompatActivity implements ListFragment
                 //
                 case 0:return "Posts";
                 case 1:return "Weddings";
-                case 2:return "";
+                case 2:return "Taxis";
+                case 3:return "Gallery";
                 default:return null;
             }
         }

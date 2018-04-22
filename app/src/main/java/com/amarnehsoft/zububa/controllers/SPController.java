@@ -38,6 +38,7 @@ public class SPController {
         SharedPreferences sp =  context.getSharedPreferences("model_likes",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(model.getCode(),true);
+        editor.apply();
     }
     public static boolean isLiked(Context context, BaseModel model){
         SharedPreferences sp =  context.getSharedPreferences("model_likes",Context.MODE_PRIVATE);
