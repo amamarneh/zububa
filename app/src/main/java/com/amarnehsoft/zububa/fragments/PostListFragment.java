@@ -62,6 +62,7 @@ public class PostListFragment extends ListFragment {
     private class PostHolder extends CustomHolder<Post>{
         private TextView tvDescription;
         private TextView tvDate;
+        private TextView tvLoveCount;
         private View layoutComment;
         private ImageView imageView;
         private ImageView imgLove;
@@ -74,6 +75,7 @@ public class PostListFragment extends ListFragment {
             layoutComment = itemView.findViewById(R.id.layoutComment);
             tvDate = itemView.findViewById(R.id.tvDate);
             imgLove = itemView.findViewById(R.id.imgLove);
+            tvLoveCount = itemView.findViewById(R.id.tvLoveCount);
         }
 
         @Override
@@ -82,6 +84,7 @@ public class PostListFragment extends ListFragment {
             tvDate.setText(DateUtils.getRelativeTimeSpanString(item.getCreationDate()));
             tvDescription.setText(item.getContent());
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
+            tvLoveCount.setText(item.getLikesCount() + "");
 
             loved = SPController.isLiked(itemView.getContext(),mItem);
 
@@ -95,7 +98,7 @@ public class PostListFragment extends ListFragment {
                 startActivity(i);
             });
             imgLove.setOnClickListener( v -> {
-                SPController.setLikeForPost(itemView.getContext(),mItem);
+                SPController.setLike(itemView.getContext(),mItem);
 
                     imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
                     mWebApi.sendLikeForPost(mItem,null);

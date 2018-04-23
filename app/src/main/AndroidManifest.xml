@@ -19,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DashboardActivity"
-            android:theme="@style/AppTheme.No">
-
-        </activity>
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:theme="@style/AppTheme.No"></activity>
         <activity android:name=".activities.CommentsListActivity" />
+        <activity android:name=".activities.AddPostActivity"></activity>
     </application>
 
 </manifest>

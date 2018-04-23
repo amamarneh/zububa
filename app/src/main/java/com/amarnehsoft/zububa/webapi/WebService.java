@@ -80,130 +80,156 @@ public class WebService implements WebApi{
     @Override
     public void writeTaxiItem(Taxi taxi, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getTaxiApi(false).saveItem(taxi, success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void writeBabyItem(Baby baby, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getBabyFBApi(false).saveItem(baby,(success)-> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void writeWeddingItem(Wedding wedding, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getWeddingFBApi(false).saveItem(wedding,(success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         }));
     }
 
     @Override
     public void writeGalleryItem(GalleryItem galleryItem, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getGalleryFBApi(false).saveItem(galleryItem,(success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         }));
     }
 
     @Override
     public void writePost(Post post, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getPostFBApi(false).saveItem(post,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendLikeForPost(Post post, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getPostFBApi(true).putLike(post, mContext, success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendLikeForBaby(Baby baby, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getBabyFBApi(true).putLike(baby,mContext,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendLikeForBlog(Blog blog, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getBlogApi(true).putLike(blog,mContext,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendLikeForGallery(GalleryItem galleryItem, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getGalleryFBApi(true).putLike(galleryItem,mContext,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendLikeForWedding(Wedding wedding, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getWeddingFBApi(true).putLike(wedding,mContext,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+                if (callBack != null) {
+                    if (success)
+                        callBack.onResponse(true);
+                    else
+                        callBack.onResponse(false);
+                }
         });
     }
 
     @Override
     public void sendCommentForPost(Post post, Comment comment, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getPostFBApi(true).putComment(post,comment,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+                if (callBack != null) {
+                    if (success)
+                        callBack.onResponse(true);
+                    else
+                        callBack.onResponse(false);
+                }
         });
     }
 
     @Override
     public void sendCommentForBaby(Baby baby, Comment comment, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getBabyFBApi(true).putComment(baby,comment,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
     @Override
     public void sendCommentForBlog(Blog blog, Comment comment, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getBlogApi(true).putComment(blog,comment,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 
@@ -216,10 +242,12 @@ public class WebService implements WebApi{
     @Override
     public void sendCommentForWedding(Wedding wedding, Comment comment, @Nullable ICallBack<Boolean> callBack) {
         FBFactory.getWeddingFBApi(true).putComment(wedding,comment,success -> {
-            if (success)
-                callBack.onResponse(true);
-            else
-                callBack.onResponse(false);
+            if (callBack != null) {
+                if (success)
+                    callBack.onResponse(true);
+                else
+                    callBack.onResponse(false);
+            }
         });
     }
 

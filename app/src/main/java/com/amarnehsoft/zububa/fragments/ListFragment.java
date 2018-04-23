@@ -22,9 +22,9 @@ public abstract class ListFragment extends Fragment {
     public static final String ARG_ITEM = "item";
     protected RecyclerView mRecyclerView;
     protected ProgressBar progressBarLoading;
-    protected View layoutMessage;
+    protected View layoutMessage,layoutAddItem;
     protected ImageView imgMessage;
-    protected TextView tvMessage;
+    protected TextView tvMessage,tvDescription;
     protected IFragmentListener mListener;
     public ListFragment() {
     }
@@ -56,7 +56,17 @@ public abstract class ListFragment extends Fragment {
         layoutMessage = view.findViewById(R.id.layoutMessage);
         imgMessage = view.findViewById(R.id.imgMessage);
         tvMessage = view.findViewById(R.id.tvMessage);
+        layoutAddItem = view.findViewById(R.id.layoutAddItem);
+        tvDescription = view.findViewById(R.id.tvDescription);
         progressBarLoading = view.findViewById(R.id.progressBarLoading);
+
+        if(getDescription() == null){
+            layoutAddItem.setVisibility(View.GONE);
+
+        }else{
+            layoutAddItem.setVisibility(View.VISIBLE);
+            tvDescription.setText(getDescription());
+        }
 
         hideMessageLayout();
         initRecyclerView();
@@ -65,6 +75,7 @@ public abstract class ListFragment extends Fragment {
 
         checkConnection();
     }
+    protected String getDescription(){return null;}
 
     private void checkConnection() {
 //        if(!MapUtil.isConnectionAvailable(getContext()))

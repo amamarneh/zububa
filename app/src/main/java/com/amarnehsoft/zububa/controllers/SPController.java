@@ -34,7 +34,7 @@ public class SPController {
         mSharedPreferences.edit().putString(ARG_LAST_NAME,value).apply();
     }
 
-    public static void setLikeForPost(Context context, BaseModel model){
+    public static void setLike(Context context, BaseModel model){
         SharedPreferences sp =  context.getSharedPreferences("model_likes",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(model.getCode(),true);

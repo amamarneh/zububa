@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.amarnehsoft.zububa.R;
 import com.amarnehsoft.zububa.abstractAdapters.Holder;
 import com.amarnehsoft.zububa.abstractAdapters.RecyclerAdapter;
+import com.amarnehsoft.zububa.controllers.SPController;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.utils.DateUtil;
 import com.amarnehsoft.zububa.webapi.WebApi;
@@ -54,8 +55,8 @@ public class WeddingsListFragments extends ListFragment {
 
 
     private class MyHolder extends Holder<Wedding>{
-        private TextView tvName,tvDate,tvDateDay,tvDateMonth;
-        private ImageView imageView;
+        private TextView tvName,tvDate,tvDateDay,tvDateMonth,tvLoveCount;
+        private ImageView imageView,imgLove;
         public MyHolder(View itemView) {
             super(itemView);
             tvName= itemView.findViewById(R.id.tvName);
@@ -63,6 +64,9 @@ public class WeddingsListFragments extends ListFragment {
             tvDateDay= itemView.findViewById(R.id.tvDateDay);
             tvDateMonth= itemView.findViewById(R.id.tvDateMonth);
             imageView= itemView.findViewById(R.id.imageView);
+            tvLoveCount= itemView.findViewById(R.id.tvLoveCount);
+            imgLove= itemView.findViewById(R.id.imgLove);
+
         }
 
         @Override
@@ -72,8 +76,24 @@ public class WeddingsListFragments extends ListFragment {
             tvDate.setText(DateUtil.formatDate(new Date(item.getWeddingDate())));
             tvDateDay.setText(DateUtil.getDayOfMonth(new Date(item.getWeddingDate())));
             tvDateMonth.setText(DateUtil.getMonthName(new Date(item.getWeddingDate())));
+            tvLoveCount.setText(item.getLikesCount() + "");
 
             Glide.with(itemView).load(item.getImgUrl()).into(imageView);
+
+            if(SPController.isLiked(itemView.getContext(),item))
+                imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
+            else
+                imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+            imgLove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    SPController.setLike(itemView.getContext(),item);
+                    WebFactory.getWebService().sendLikeForWedding(item,null);
+                }
+            });
+
         }
 
         @Override

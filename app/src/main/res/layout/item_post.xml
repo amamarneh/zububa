@@ -30,12 +30,25 @@
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:tint="@color/red"
-            android:id="@+id/imgLove"
-            android:src="@drawable/ic_favorite_border_black_24dp"
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:tint="@color/red"
+                android:id="@+id/imgLove"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvLoveCount"
+                android:text="123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <TextView
             android:layout_margin="3dp"
             android:id="@+id/layoutComment"
