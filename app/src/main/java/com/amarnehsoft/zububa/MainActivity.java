@@ -3,21 +3,10 @@ package com.amarnehsoft.zububa;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.amarnehsoft.zububa.activities.DashboardActivity;
-import com.amarnehsoft.zububa.dummy.Dummy;
+import com.amarnehsoft.zububa.ui.activities.DashboardActivity;
 import com.amarnehsoft.zububa.model.Blog;
-import com.amarnehsoft.zububa.model.Comment;
-import com.amarnehsoft.zububa.model.Like;
-import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
-import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
-import com.amarnehsoft.zububa.webapi.fb.FBFactory;
-import com.amarnehsoft.zububa.webapi.fb.constants.FB_REF;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

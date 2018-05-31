@@ -2,8 +2,8 @@ package com.amarnehsoft.zububa.core;
 
 import android.app.Application;
 
-import com.amarnehsoft.zububa.webapi.WebDummy;
-import com.amarnehsoft.zububa.webapi.WebService;
+import com.amarnehsoft.zububa.data.webapi.WebDummy;
+import com.amarnehsoft.zububa.data.webapi.WebService;
 
 /**
  * Created by ALa on 3/18/2018.

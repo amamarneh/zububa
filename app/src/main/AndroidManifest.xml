@@ -20,10 +20,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".ui.activities.DashboardActivity"
             android:theme="@style/AppTheme.No"></activity>
-        <activity android:name=".activities.CommentsListActivity" />
-        <activity android:name=".activities.AddPostActivity"></activity>
+        <activity android:name=".ui.activities.CommentsListActivity" />
+        <activity android:name=".ui.activities.AddPostActivity"></activity>
     </application>
 
 </manifest>

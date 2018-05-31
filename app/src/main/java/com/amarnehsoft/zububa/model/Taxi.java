@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.amarnehsoft.zububa.abstractAdapters.MItem;
+import com.amarnehsoft.zububa.ui.abstractAdapters.MItem;
 
 /**
  * Created by user on 3/19/2018.

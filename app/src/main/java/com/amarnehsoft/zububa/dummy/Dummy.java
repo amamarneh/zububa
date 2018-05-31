@@ -6,10 +6,10 @@ import android.util.Log;
 import com.amarnehsoft.zububa.model.Blog;
 import com.amarnehsoft.zububa.model.Comment;
 import com.amarnehsoft.zububa.model.Like;
-import com.amarnehsoft.zububa.webapi.callBacks.ICallBack;
-import com.amarnehsoft.zububa.webapi.callBacks.IListCallBack;
-import com.amarnehsoft.zububa.webapi.fb.BlogFBApi;
-import com.amarnehsoft.zububa.webapi.fb.FBFactory;
+import com.amarnehsoft.zububa.data.webapi.callBacks.ICallBack;
+import com.amarnehsoft.zububa.data.webapi.callBacks.IListCallBack;
+import com.amarnehsoft.zububa.data.webapi.fb.BlogFBApi;
+import com.amarnehsoft.zububa.data.webapi.fb.FBFactory;
 
 import java.util.Date;
 import java.util.List;

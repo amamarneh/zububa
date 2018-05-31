@@ -1,9 +1,10 @@
-<android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/layoutMessage"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
@@ -23,36 +24,53 @@
             android:layout_height="wrap_content" />
     </LinearLayout> <!-- Layout Message -->
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ProgressBar
-            android:minHeight="1dp"
-            android:indeterminate="true"
-            android:id="@+id/progressBarLoading"
-            style="?android:attr/progressBarStyleHorizontal"
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <android.support.v7.widget.CardView
-            android:id="@+id/layoutAddItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:padding="10dp"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:visibility="gone"
+                android:minHeight="1dp"
+                android:indeterminate="true"
+                android:id="@+id/progressBarLoading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.CardView
+                android:id="@+id/layoutAddItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:text="click here to add new item"
+                <LinearLayout
+                    android:padding="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout> <!-- List and loading layout -->
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:text="Click here to add new item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <com.gturedi.views.StatefulLayout
+                android:id="@+id/stateful"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:stfAnimationEnabled="true"
+                app:stfInAnimation="@android:anim/slide_in_left"
+                app:stfOutAnimation="@android:anim/slide_out_right"
+                >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            </com.gturedi.views.StatefulLayout>
+        </LinearLayout> <!-- List and loading layout -->
+    </android.support.v4.widget.NestedScrollView>
+
 
 </android.support.design.widget.CoordinatorLayout>
