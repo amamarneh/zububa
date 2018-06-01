@@ -13,6 +13,7 @@ import com.amarnehsoft.zububa.repo.PostsRepo;
 import com.amarnehsoft.zububa.ui.abstractAdapters.CustomHolder;
 import com.amarnehsoft.zububa.ui.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.ui.abstractAdapters.RecyclerAdapterMultipleTypes;
+import com.amarnehsoft.zububa.ui.activities.AddPostActivity;
 import com.amarnehsoft.zububa.ui.activities.CommentsListActivity;
 import com.amarnehsoft.zububa.controllers.SPController;
 import com.amarnehsoft.zububa.model.Post;
@@ -29,134 +30,31 @@ import java.util.List;
  * Created by ALa on 3/22/2018.
  */
 
-/**
- * NewsFeed Fragment
- * it has multiple types of models
- */
 public class PostListFragment extends ListFragment {
-    private WebApi mWebApi = WebFactory.getWebService();
-
     @Override
     public void setupRecyclerViewAdapter() {
-        statefulLayout.showLoading();
-
+        showLoading();
         new PostsRepo().getNewsFeed()
                 .addOnCompleteListener( task -> {
-                    statefulLayout.showEmpty("empty");
+                    showContent();
                     if(task.isSuccessful()){
-                        progressBarLoading.setVisibility(View.GONE);
                         PostsAdapter adapter = new PostsAdapter(task.getResult());
                         mRecyclerView.setAdapter(adapter);
                     }else{
-                        progressBarLoading.setVisibility(View.GONE);
+                        showError("Error");
                     }
                 });
     }
 
     @Override
     protected String getDescription() {
+        layoutAddItem.setOnClickListener(view -> {
+            Intent i = new Intent(getContext(), AddPostActivity.class);
+            startActivity(i);
+        });
         return "Click here to add new Post";
     }
 
     @Override
     protected void loadDataFromWeb() {}
-
-    private class PostHolder extends CustomHolder<Post>{
-        private TextView tvDescription;
-        private TextView tvDate;
-        private TextView tvLoveCount;
-        private View layoutComment;
-        private ImageView imageView;
-        private ImageView imgLove;
-
-        private boolean loved = false;
-        public PostHolder(View itemView) {
-            super(itemView);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            imageView = itemView.findViewById(R.id.imageView);
-            layoutComment = itemView.findViewById(R.id.layoutComment);
-            tvDate = itemView.findViewById(R.id.tvDate);
-            imgLove = itemView.findViewById(R.id.imgLove);
-            tvLoveCount = itemView.findViewById(R.id.tvLoveCount);
-        }
-
-        @Override
-        public void renderItem(Post item) {
-            super.renderItem(item);
-            tvDate.setText(DateUtils.getRelativeTimeSpanString(item.getCreationDate()));
-            tvDescription.setText(item.getContent());
-            Glide.with(itemView).load(item.getImgUrl()).into(imageView);
-            tvLoveCount.setText(item.getLikesCount() + "");
-
-            loved = SPController.isLiked(itemView.getContext(),mItem);
-
-            if(loved)
-                imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
-            else
-                imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-
-            layoutComment.setOnClickListener( v -> {
-                Intent i =  CommentsListActivity.getIntent(getContext(),CommentsFragment.TYPE_POST,mItem);
-                startActivity(i);
-            });
-            imgLove.setOnClickListener( v -> {
-                SPController.setLike(itemView.getContext(),mItem);
-
-                    imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    mWebApi.sendLikeForPost(mItem,null);
-
-
-            });
-        }
-
-        @Override
-        public void onClick(View view) {
-
-        }
-    }
-    private class TaxiHolder extends CustomHolder<Taxi>{
-        private TextView tvName,tvPhone,tvDescription;
-        public TaxiHolder(View itemView) {
-            super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPhone = itemView.findViewById(R.id.tvPhone);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-        }
-
-        @Override
-        public void renderItem(Taxi item) {
-            super.renderItem(item);
-            tvName.setText(item.getName());
-            tvPhone.setText(item.getPhone());
-            tvDescription.setText(item.getDesc());
-        }
-
-        @Override
-        public void onClick(View view) {
-            if(mListener != null)
-                mListener.onItemClicked(mItem);
-        }
-    }
-
-    private class MyAdapter extends RecyclerAdapterMultipleTypes{
-
-        public MyAdapter(List<MItem> items) {
-            super(items);
-        }
-        @Override
-        public CustomHolder getHolder(int type, ViewGroup parent) {
-            if(type == Post.VIEW_TYPE){
-                LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-                View view = layoutInflater.inflate(R.layout.item_post, parent, false);
-                return new PostHolder(view);
-            }
-            if(type == Taxi.VIEW_TYPE){
-                LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-                View view = layoutInflater.inflate(R.layout.item_taxi, parent, false);
-                return new TaxiHolder(view);
-            }
-            return null;
-        }
-    }
-
 }

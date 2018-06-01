@@ -29,7 +29,6 @@ public abstract class ListFragment extends BaseFragment {
     StatefulLayout statefulLayout;
 
     protected RecyclerView mRecyclerView;
-    protected ProgressBar progressBarLoading;
     protected View layoutMessage,layoutAddItem;
     protected ImageView imgMessage;
     protected TextView tvMessage,tvDescription;
@@ -65,12 +64,8 @@ public abstract class ListFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         mRecyclerView = view.findViewById(R.id.rv);
-        layoutMessage = view.findViewById(R.id.layoutMessage);
-        imgMessage = view.findViewById(R.id.imgMessage);
-        tvMessage = view.findViewById(R.id.tvMessage);
         layoutAddItem = view.findViewById(R.id.layoutAddItem);
         tvDescription = view.findViewById(R.id.tvDescription);
-        progressBarLoading = view.findViewById(R.id.progressBarLoading);
         mNestedScrollView = view.findViewById(R.id.nestedScrollView);
 
         if(getDescription() == null){
@@ -81,7 +76,6 @@ public abstract class ListFragment extends BaseFragment {
             tvDescription.setText(getDescription());
         }
 
-        hideMessageLayout();
         initRecyclerView();
         setupRecyclerViewAdapter();
         loadDataFromWeb();
@@ -91,34 +85,21 @@ public abstract class ListFragment extends BaseFragment {
     protected String getDescription(){return null;}
 
     private void checkConnection() {
-//        if(!MapUtil.isConnectionAvailable(getContext()))
-//            showMessageLayout("No Internet Connection",R.drawable.ic_signal_wifi_off_black_48dp);
     }
 
-    protected void showMessageLayout(String msg, String url){
-        if(isAdded()) {
-            tvMessage.setText(msg);
-            if (url != null)
-                Glide.with(getContext()).load(url).into(imgMessage);
 
-            layoutMessage.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }
+    protected void showLoading(){
+        statefulLayout.showLoading("Loading");
     }
-    protected void showMessageLayout(String msg, int drawable){
-        if(isAdded()){
+    protected void showContent(){
+        statefulLayout.showContent();
+    }
+    public void showError(String err){
+        statefulLayout.showError(err, v->{
+            setupRecyclerViewAdapter();
+        });
+    }
 
-            tvMessage.setText(msg);
-            Glide.with(getContext()).load(drawable).into(imgMessage);
-
-            layoutMessage.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }
-    }
-    protected void hideMessageLayout(){
-        layoutMessage.setVisibility(View.GONE);
-        mRecyclerView.setVisibility(View.VISIBLE);
-    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -128,9 +109,7 @@ public abstract class ListFragment extends BaseFragment {
             throw new RuntimeException(context.toString() + " must implement IFragmentListener");
         }
     }
-    protected void setLoading(boolean loading){
-        progressBarLoading.setVisibility(loading?View.VISIBLE:View.GONE);
-    }
+
 
     @Override
     public void onDetach() {

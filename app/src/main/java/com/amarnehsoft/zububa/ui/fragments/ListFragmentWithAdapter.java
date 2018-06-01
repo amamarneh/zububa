@@ -17,15 +17,20 @@ public abstract class ListFragmentWithAdapter<T> extends ListFragment implements
     @Override
     public void onResponse(List<T> value) {
         mItems = value;
+        if(mItems != null && mItems.size() > 0){
+
         MyAdapter adapter = new MyAdapter(value);
         mRecyclerView.setAdapter(adapter);
 
-        progressBarLoading.setVisibility(View.GONE);
+        showContent();
+        }else{
+            statefulLayout.showEmpty("No data");
+        }
     }
 
     @Override
     public void onError(String err) {
-        progressBarLoading.setVisibility(View.GONE);
+        showError("Error");
 
     }
 

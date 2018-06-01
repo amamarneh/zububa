@@ -1,7 +1,9 @@
 package com.amarnehsoft.zububa.data.webapi;
 
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.repo.Task;
 import com.amarnehsoft.zububa.ui.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
@@ -12,6 +14,9 @@ import com.amarnehsoft.zububa.model.Taxi;
 import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.data.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.data.webapi.callBacks.IListCallBack;
+
+import java.net.URI;
+import java.net.URL;
 
 /**
  * Created by ALa on 3/17/2018.
@@ -69,6 +74,7 @@ public interface WebApi {
 
 //    void getComments(Object model, IListCallBack<Comment> callBack);
 
+    Task<String> uploadImage(Uri url);
 
     // ..
 }

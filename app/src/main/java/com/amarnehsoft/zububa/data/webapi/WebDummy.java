@@ -1,8 +1,10 @@
 package com.amarnehsoft.zububa.data.webapi;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.repo.Task;
 import com.amarnehsoft.zububa.ui.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
@@ -14,6 +16,8 @@ import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.data.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.data.webapi.callBacks.IListCallBack;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -106,11 +110,13 @@ public class WebDummy implements WebApi {
         post1.setCode("cc1");
         post1.setImgUrl("https://www.owlstalk.co.uk/forums/uploads/monthly_2018_01/post.jpg.afa4665cc9a85cd8275d5bd50658cf00.jpg");
         post1.setContent("post content");
+        post1.setType(Post.TYPE_POST);
 
         Post post2 = new Post();
         post2.setCode("cc21");
         post2.setImgUrl("https://scontent.fjrs3-1.fna.fbcdn.net/v/t1.0-9/30740589_634375100234866_6002984800242593092_n.jpg?_nc_cat=0&oh=a074de9e00679d713f4d0f4c7d72ae85&oe=5B5CE566");
         post2.setContent("post content2");
+        post2.setType(Post.TYPE_POST);
 
         List<Post> posts = Arrays.asList(post1,post2);
         callBack.onResponse(posts);
@@ -238,5 +244,12 @@ public class WebDummy implements WebApi {
     @Override
     public void getWeddingComments(Wedding model, IListCallBack<Comment> callBack) {
 
+    }
+
+    @Override
+    public Task<String> uploadImage(Uri url) {
+        Task<String> task = new Task<>();
+        task.response("https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg",true);
+        return task;
     }
 }

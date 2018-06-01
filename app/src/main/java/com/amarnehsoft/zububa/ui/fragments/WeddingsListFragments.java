@@ -28,24 +28,21 @@ public class WeddingsListFragments extends ListFragment {
     private IListener mListener;
     @Override
     public void setupRecyclerViewAdapter() {
-        statefulLayout.showLoading();
+        showLoading();
 
         WebApi webApi = WebFactory.getWebService();
         webApi.getWeddings(new IListCallBack<Wedding>() {
             @Override
             public void onResponse(List<Wedding> value) {
-                statefulLayout.showContent();
-                progressBarLoading.setVisibility(View.GONE);
+                showContent();
 
                 MyAdapter adapter = new MyAdapter(value);
                 mRecyclerView.setAdapter(adapter);
-                mNestedScrollView.fullScroll(View.FOCUS_UP);
             }
 
             @Override
             public void onError(String err) {
-                progressBarLoading.setVisibility(View.GONE);
-
+                showError("Network error");
             }
         });
     }

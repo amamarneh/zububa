@@ -16,9 +16,10 @@ public class Task<T> {
     public Task(TaskResponse<T> mListener) {
         this.mListener = mListener;
     }
-    public void addOnCompleteListener(TaskResponse<T> response){
+    public Task<T> addOnCompleteListener(TaskResponse<T> response){
         this.mListener = response;
         notifyResponse();
+        return this;
     }
 
     public Task() {
@@ -54,6 +55,7 @@ public class Task<T> {
 
     public synchronized void cancel(){
         mListener = null;
+        result=null;
     }
 
     public interface TaskResponse<T>{

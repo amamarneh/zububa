@@ -1,8 +1,10 @@
 package com.amarnehsoft.zububa.data.webapi;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
+import com.amarnehsoft.zububa.repo.Task;
 import com.amarnehsoft.zububa.ui.abstractAdapters.MItem;
 import com.amarnehsoft.zububa.model.Baby;
 import com.amarnehsoft.zububa.model.Blog;
@@ -14,6 +16,11 @@ import com.amarnehsoft.zububa.model.Wedding;
 import com.amarnehsoft.zububa.data.webapi.callBacks.ICallBack;
 import com.amarnehsoft.zububa.data.webapi.callBacks.IListCallBack;
 import com.amarnehsoft.zububa.data.webapi.fb.FBFactory;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.net.URI;
+import java.net.URL;
 
 /**
  * Created by ALa on 3/17/2018.
@@ -65,7 +72,7 @@ public class WebService implements WebApi{
 
     @Override
     public void getPosts(IListCallBack<Post> callBack) {
-        FBFactory.getPostFBApi(true).getList(callBack);
+        FBFactory.getPostFBApi(false).getList(callBack);//
     }
 
     @Override
@@ -265,6 +272,21 @@ public class WebService implements WebApi{
     @Override
     public void getWeddingComments(Wedding model, IListCallBack<Comment> callBack) {
         FBFactory.getWeddingFBApi(true).getComments(model.getCode(),true,callBack);
+    }
+
+    @Override
+    public Task<String> uploadImage(Uri url) {
+        Task<String> taskUploadImage = new Task<>();
+        StorageReference reference = FirebaseStorage.getInstance().getReference();
+        reference.child("images").putFile(url)
+                .addOnCompleteListener(task -> {
+                   if(task.isSuccessful()){
+                       taskUploadImage.response(task.getResult().getDownloadUrl().toString(),true);
+                   }else{
+                       taskUploadImage.response(null,false);
+                   }
+                });
+        return taskUploadImage;
     }
 
 

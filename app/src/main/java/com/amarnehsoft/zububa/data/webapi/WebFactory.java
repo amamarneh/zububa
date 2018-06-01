@@ -6,6 +6,6 @@ package com.amarnehsoft.zububa.data.webapi;
 
 public class WebFactory {
     public static WebApi getWebService(){
-        return WebDummy.getInstance();
+        return WebService.getInstance();
     }
 }

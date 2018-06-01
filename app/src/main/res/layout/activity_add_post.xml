@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".ui.activities.AddPostActivity">
     <EditText
         android:id="@+id/txtDescription"
@@ -19,5 +20,19 @@
         android:src="@drawable/zububa_art"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnSend"
+        android:layout_margin="10dp"
+        app:backgroundTint="@color/blue"
+        android:text="Send"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBarLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

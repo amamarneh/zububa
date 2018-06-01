@@ -94,13 +94,13 @@ public class PostsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 imgLove.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
             layoutComment.setOnClickListener( v -> {
-                Intent i =  CommentsListActivity.getIntent(itemView.getContext(), CommentsFragment.TYPE_POST,item);
+                Intent i =  CommentsListActivity.getIntent(itemView.getContext(), CommentsFragment.TYPE_POST,posts.get(getAdapterPosition()));
                 itemView.getContext().startActivity(i);
             });
             imgLove.setOnClickListener( v -> {
-                SPController.setLike(itemView.getContext(),item);
+                SPController.setLike(itemView.getContext(),posts.get(getAdapterPosition()));
                 imgLove.setImageResource(R.drawable.ic_favorite_black_24dp);
-                WebFactory.getWebService().sendLikeForPost(item,null);
+                WebFactory.getWebService().sendLikeForPost(posts.get(getAdapterPosition()),null);
             });
         }
     }
